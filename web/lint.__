@@ -1,0 +1,611 @@
+<?php
+
+//	Contents:
+//
+//		1. Configuration
+//
+//		2. Render the page
+//
+//		3. Display and templating functions
+
+		/*. forward string 	function lint_css(); .*/						//	template
+		/*. forward void 	function lint_content(); .*/					//	main content
+		/*. forward void 	function lint_nav_default(); .*/				//	RHS nav block
+		/*. forward string 	function lint_files_list(string $subdir=); .*/	//	search action
+		/*_ forward string	function lint_error(string $msg=); _*/			//	print errors
+		/*. forward void	function lint_add_nav(string $title=, string $html=, string $color=); .*/
+		/*. forward string	function lint_home_page(); .*/					//	default content
+
+//		4. PHPLint functions
+
+		/*. forward string	function lint_output(); .*/						
+		/*. forward bool	function lint_copy_working(string $test_file, string $working_file); .*/
+		/*. forward string	function lint_header(bool $print_sandbox=); .*/
+		/*. forward string	function lint_exec(string $working_file); .*/
+
+//		5. PHPCallGraph functions
+
+		/*. forward string	function phpcallgraph_diagram(string $test_file, string $working_file); .*/
+
+/**
+ *	Run PHPLint against a file passed as $_GET['file']
+ *	@author	Richard Strickland <strix@ekhayaict.com>
+ */
+ 
+	//----------------------------------------------------------------------------------------------
+	//	1. Configuration
+	//----------------------------------------------------------------------------------------------
+
+	define(	'INSTALL_PATH', (string)str_replace('/web/', '/', $_SERVER['DOCUMENT_ROOT']));
+	define( 'LINT_PATH', '/usr/bin/phplint');
+	define( 'MOD_PATH', '/home/strix/Dev/phplint/modules');
+	define( 'PHP_VER', '5');
+	define( 'PCG_PATH', INSTALL_PATH . "inc/etc/tools/phpcallgraph/phpcallgraph.php");
+
+
+	//----------------------------------------------------------------------------------------------
+	//	2. Render the page
+	//----------------------------------------------------------------------------------------------
+
+	$content = '';			//	global used by views
+	$nav = '';				//	global used by views
+	$call_graph = '';		//	global used by phpcallgraph
+
+	lint_content();			//	render content
+	lint_nav_default();
+
+	$header = ''
+	 . "<html>\n"
+	 . "<head>\n"
+	 . "<style>\n"
+	 . lint_css()
+	 . "</style>\n"
+	 . "</head>\n"
+	 . "<body>\n"
+	 . "<h1>PHPLint</h1>"
+	 . "<table noborder width='100%'>\n"
+	 . "\t<tr>\n"
+	 . "\t\t<td valign='top'>$content</td>\n"
+	 . "\t\t<td valign='top' width='10px'></td>\n"
+	 . "\t\t<td valign='top' width='500px'>"
+		 . $nav
+		 . $call_graph
+	 . "</td>\n"
+	 . "\t</tr>\n"
+	 . "</table>\n"
+	 . "</body>\n</html>\n";
+
+	echo $header;
+
+	//----------------------------------------------------------------------------------------------
+	//	3. Display and templating
+	//----------------------------------------------------------------------------------------------
+
+	/**
+	 *	Inline CSS used by this script
+	 *	@return	string
+	 */
+
+	function lint_css()
+	{
+		return ''
+		 . "\t\tbody { font-family: Verdana, Arial, Helvetica, sans-serif; font-size: 10pt; }"
+		 . "\t\tdiv.indent {"
+			 . " background-color: rgba(100, 100, 200, 0.2);"
+			 . " margin-bottom: 3px;"
+			 . " padding: 12px;"
+			 . " padding-left: 15px;"
+			 . " border-radius: 5px; "
+		 . "}\n"
+		 . "\t\tdiv.error { background-color: #faa; }\n"
+		 . "\t\tdiv.warning { background-color: #ffa; }\n"
+		 . "\t\tdiv.notice { background-color: #aaf; }\n";
+	}
+
+	/**
+	 *	Main content pane
+	 *	@return	void
+	 */
+
+	function lint_content()
+	{
+		global $content;
+		$mode = 'home';
+
+		if (array_key_exists('mode', $_GET)) { $mode = (string)$_GET['mode']; }
+
+		switch(strtolower($mode))
+		{
+			case 'home':
+				$content .= lint_home_page();			
+				lint_header(true);					//	prints the contents of sandbox
+				break;
+
+			case 'browse':	$content .= lint_files_list();			break;
+			case 'lint':	$content .= lint_output();				break;
+
+			default: 		$content .= "Action not recognized";
+		}
+	}
+
+	/**
+	 *	Navigation / current directory listing
+	 *	@return	void
+	 */
+
+	function lint_nav_default()
+	{
+		global $nav;
+
+		$mode = (array_key_exists('mode', $_GET) ? (string)$_GET['mode'] : 'browse');
+
+		$html = ''
+		 . "<small>" . INSTALL_PATH . "</small><br/><br/>\n"
+		 . "<table noborder>"
+		 . "\t<tr><td><small>mode:</small></td><td><small>" . $mode . "</small></td></tr>\n"
+		 . "\t<tr><td><small>lint path:</small></td><td><small>" . LINT_PATH . "</small></td></tr>\n"
+		 . "\t<tr><td><small>module path:</small></td><td><small>" . MOD_PATH . "</small></td></tr>\n"
+		 . "</table>";
+		lint_add_nav('Project', $html);
+
+		$html = ''
+		 . "<form name='search' method='GET'>\n"
+		 . "\t<input type='hidden' name='mode' value='browse' />\n"
+		 . "\t<input type='text' name='filter' value='' style='width: 100%;' />\n"
+		 #. "\t<input type='submit' value='&gt;' />\n"
+		 . "</form>\n";
+		lint_add_nav('Search', $html);
+	}
+
+	/**
+	 *	List php files below the working directory
+	 *
+	 *	@param	string	$subdir	Relative to INSTALL_PATH, for recursive search
+	 *	@return	string
+	 */
+
+	function lint_files_list($subdir = '')
+	{
+		$files = /*. (string[int]) .*/ array();		//	files in this directory
+		$subs = /*. (string[int]) .*/ array();		//	subdirectories of this one
+		$filter = '';								//	narrow results
+		$results = '';								//	return value
+
+		if (true == array_key_exists('filter', $_GET)) { $filter = (string)$_GET['filter']; }
+
+		$dir = dir(INSTALL_PATH . $subdir);
+		while (($file = $dir->read()) !== false)
+		{
+			if (is_dir(INSTALL_PATH . $subdir . $file))
+			{
+				if (('.' !== $file) && ('..' !== $file)) { $subs[] = $file . '/'; }
+			}
+			else
+			{
+				if (
+					('.php' === substr($file, strlen($file) - 4)) &&
+					(
+						('' === $filter) || 
+						(false !== strpos(strtolower($file), strtolower($filter)))
+					)
+				) { $files[] = $file; }
+			}
+			//$list .= "<small>$file</small><br/>\n";
+		}
+		$dir->close();
+
+		foreach($files as $file) {
+			$relfile = $subdir . $file;
+			$results .= "<a href='./lint.php?mode=lint&file=$relfile'>$file</a><br/>\n";
+		}
+
+		foreach($subs as $sub) {
+			$subtree = ''
+			 . "<div class='indent'>\n"
+			 . "<b>./" . $sub . "</b><br/>\n"
+			 . lint_files_list($subdir . $sub)
+			 . "</div>\n";
+
+			if (false !== strpos($subtree, '.php')) { $results .= $subtree; }
+		}
+
+		return $results;
+	}
+
+	/**
+	 *	Note an error
+	 *	@param	string	$msg	Error message
+	 *	@return	string
+	 */
+
+	function lint_error($msg)
+	{
+		return "<div class='indent' style='background-color: #f00;'>$msg</div>\n";
+	}
+
+	/**
+	 *	Add a section to the nav
+	 *	@param	string	$title	Section title
+	 *	@param	string	$html	Content of this sav section
+	 *	@param	string	$color	Any color usable by CSS
+	 *	@return	void
+	 */
+
+	function lint_add_nav($title = '', $html = '', $color = 'rgba(100, 100, 200, 0.2)')
+	{
+		global $nav;
+		if ('' !== $title) { $title = "<h3>" . $title . "</h3>\n"; }
+		$nav .= ''
+		 . "<div class='indent' style='background-color: $color;'>\n"
+		 . $title
+		 . $html
+		 . "</div>\n";
+	}
+
+	/**
+	 *	Default / instruction page
+	 *	@return	string
+	 */
+
+	function lint_home_page()
+	{
+		return ''
+		 . "<div class='indent'>\n"
+		 . "<h3>FotoFeliz PHPLint integration</h3>\n"
+		 . "How to use:\n"
+		 . "<ul>\n"
+		 . "\t<li><b>Install PHPLint binary:</b> Get the latest version from "
+			 . "<a href='http://www.icosaedro.it/phplint/'>http://www.icosaedro.it/phplint/</a> "
+			 . "and follow directions for compiling on your platform.  Rename the compiled binary "
+			 . "<tt>/usr/bin/phplint</tt> and set permissions such that the apache user can run "
+			 . "it.</li>\n"
+		 . "\t<li><b>Check that PHP CLI is installed:</b> This script assumes that php can be run"
+			 . " from the shell as <tt>php</tt>.</li>\n"
+		 . "\t<li><b>Check permissions on webroot:</b> This script will need to create files and"
+			 . " directories in <tt>./web/</tt></li>\n"
+		 . "\t<li><b>Configure this script:</b> Ensure that the file locations in Section 1 of "
+			 . "<tt>./web/lint.php</tt> are correct</li>\n"
+		 . "</ul>\n"
+		 . "Optional:\n"
+		 . "<ul>\n"
+		 . "\t<li><b>Install PHP Call Graph:</b> Unzip the file "
+			 . "<tt>./inc/etc/tools/phpcallgraph.tar.gz</tt> and check that the location matches "
+			 . "the PCG_PATH constant in section 1 of this script.  If you do not wish to "
+			 . "generate call graphs this constant should be set to the empty string.  This "
+			 . "tool assumes <a href='http://www.graphviz.org/'>Graphviz</a> is installed on "
+			 . "your development machine.</li>\n"
+		 . "</ul>\n"
+		 . "</div>\n"
+		 . "<div class='indent'>\n"
+		 . "<h3>Maintaining the sandbox</h3>\n"
+		 . "<p>The sandbox is the test environment in which source files are examined by PHPLint.  "
+		 . "The code to be tested may:</p>\n"
+		 . "<ul>\n"
+		 . "\t<li>inherit from other classes</li>\n"
+		 . "\t<li>require global configurations</li>\n"
+		 . "\t<li>call the framework core</li>\n"
+		 . "</ul>\n"
+		 . "<p>To keep this environment consistent with the run-time of the framework, changes to "
+		 . "core and configuration objects should be copied to <tt>./inc/system/sandbox/</tt>.  "
+		 . "Code in the copied files which causes PHPLint to fail can usually be commented out "
+		 . "without affecting the verisimilitude of the tests.</p>"
+		 . "\n"
+		 . "<p>Changes to the sandbox should also be copied to the sandbox on the SVN server used "
+		 . "for revision testing.</p>\n"
+		 . "\n"
+		 . "</div>\n"
+		 . "<div class='indent'>\n"
+		 . "<h3>Useful links</h3>\n"
+		 . "<ul>\n"
+		 . "\t<li><a href='/lint.php?mode=browse'>All .php files in this deployment</a></li>\n"
+		 . "\t<li>"
+			 . "<a href="
+			 . "'http://hub.fotofeliz.com.br/projects/development/wiki/SVN_pre-commit_hook'"
+			 . ">Documentation on FotoFeliz wiki</a></li>\n"
+		 . "\t<li>"
+			 . "<a href='http://www.icosaedro.it/phplint/manual.html'>"
+			 . "PHPLint reference manual</a></li>\n"
+		 . "\t<li>"
+			 . "<a href="
+			 . "'http://www.jsums.edu/cms/tues/docs/CSC450-Sp2011/"
+			 . "CSC450-Sp2011-Module-1-Static-Code-Analysis.pdf'"
+			 . ">Geoghegan & Meghanathan - Introduction to Static Code Analysis (pdf)</a></li>"
+		 . "</ul>\n"
+		 . "</div>\n"
+		 . '';
+	}
+
+	//----------------------------------------------------------------------------------------------
+	//	4. PHPLint functions
+	//----------------------------------------------------------------------------------------------
+
+	/**
+	 *	Run phplint and return the output
+	 *	@return	string
+	 */
+
+	function lint_output()
+	{
+		if (false == array_key_exists('file', $_GET)) { return lint_error('No file specified.'); }
+
+		$test_file = (string)$_GET['file'];
+		$working_file = 'web/lint_working.php';
+
+		$result = ''
+		 . "<div class='indent'>\n"
+		 . "<h3>" . htmlentities($test_file) . "</h3>\n"
+		 . "</div>\n";
+
+
+		if (false == file_exists(INSTALL_PATH . $test_file))
+		{
+			return $result . lint_error("File not found:<br/>\n" . $test_file);
+		}
+
+		if (false == lint_copy_working($test_file, $working_file))
+		{
+			return ''
+			 . $result
+			 . lint_error(''
+				 . "Could not create working file:<br/>\n"
+				 . "<tt>$test_file => $working_file</tt><br/>\n<br/>\n"
+				 . "Please check that Apache user has write permission on ./web/<br/>"
+			   );
+		}
+
+		if ('' !== PCG_PATH) { $result .= phpcallgraph_diagram($test_file, $working_file); }
+
+		$result .= lint_exec($working_file);
+
+		return $result;
+	}
+
+	/**
+	 *	Copy test file as workign file and include test invironment
+	 *
+	 *	@param	string	$test_file		Location relative to INSTALL_PATH
+	 *	@param	string	$working_file	Location relative to INSTALL_PATH
+	 *	@return	bool
+	 */
+
+	function lint_copy_working($test_file, $working_file)
+	{
+
+		$raw = @file_get_contents(INSTALL_PATH . $test_file);
+
+		//	comment out lines containing PHPLINT-IGNORE
+		$lines = explode("\n", $raw);
+		foreach($lines as $idx => $line)
+		{
+			if (false !== strpos(' ' . strtolower($line), 'phpplint-ignore'))
+			{
+				$lines[$idx] = '#' . $line;
+			}
+		}
+
+		$prepared_working_file = lint_header() . implode("\n", $lines);
+
+		$check = @file_put_contents(INSTALL_PATH . $working_file, $prepared_working_file);
+		if (false === $check) { return false; }
+		return true;
+	}
+
+
+	/**
+	 *	Lint header to include the test environemtn in the working file
+	 *
+	 *	@param	bool	$print_sandbox	Optionally prints list of files in sandbox to $content
+	 *	@return	string
+	 */
+
+	function lint_header($print_sandbox = false)
+	{
+		global $content;
+		$requires = '';
+		$sandbox_report = '';
+		$sandbox_dir = INSTALL_PATH . 'inc/system/sandbox/';
+		$dir = dir($sandbox_dir);
+	
+		while (($file = $dir->read()) !== false)
+		{
+			if ((false == is_dir($sandbox_dir . $file)) && (false === strpos($file, '~')))
+			{
+				$requires .= "\trequire_once('" . $sandbox_dir . $file . "');";
+				if (true == $print_sandbox)
+				{
+					$sandbox_report .= "./inc/system/sandbox/" . $file . "<br/>\n";
+
+				}
+			}
+		}
+
+		if (true == $print_sandbox)
+		{
+			$content .= ''
+			 . "<div class='indent' style='background-color: #555;'>"
+			 . "<h3>Sandbox</h3>\n"
+			 . "<div class='indent' style='background-color: #555; margin-left: 20px; color: #fff;'>"
+			 . "<tt><small>\n" . $sandbox_report . "</small></tt>"
+			 . "</div>\n"
+			 . "</div>\n";
+
+		}
+
+		return ''
+	 	 . "<?php "
+			 . "/*."
+			 . " require_module 'standard';"
+			 . " require_module 'pcre';"
+			 . " require_module 'hash';"
+			 . ".*/" 
+			 . $requires
+	 	. "?>";
+
+	}
+
+	/**
+	 *	Run phplint against the working file and parse results
+	 *
+	 *	@param	string	$working_file	As extracted from transaction, with test header
+	 *	@return	string					HTML report of significant lint results
+	 */
+
+	function lint_exec($working_file)
+	{
+		$result = '';
+
+		$error_count = 0;
+		$warn_count = 0;
+
+		$shell_cmd = ''
+		 . 'phplint '
+		 . '--modules-path ' . MOD_PATH . ' '
+		 . '--php-version ' . PHP_VER . ' '
+		 . INSTALL_PATH . $working_file;
+
+		$report = shell_exec($shell_cmd);
+
+		$lines = /*. (string[int]) .*/ array();
+		$lines = explode("\n", $report);
+
+		$result .= ''
+		 . "<div class='indent' style='background-color: #555;'>"
+		 . "<h3>Running</h3>\n"
+		 . "<div class='indent' style='background-color: #555; margin-left: 20px; color: #fff;'>"
+		 . "<tt><small>\n" . htmlentities($shell_cmd) . "</small></tt>"
+		 . "</div>\n"
+		 . "</div>\n";
+
+		foreach($lines as $line)
+		{
+			//--------------------------------------------------------------------------------------
+			//	print test results
+			//--------------------------------------------------------------------------------------
+			$line = (string)str_replace(INSTALL_PATH, './', $line);
+			$bgcolor = '#aaa';			
+			if (false !== strpos($line, 'Warning:')) { $bgcolor = "#faa"; }
+			if (false !== strpos($line, 'ERROR:')) { $bgcolor = "#faf"; }
+			if (false !== strpos($line, 'FATAL ERROR:')) { $bgcolor = "#f00"; }
+
+			if (false !== strpos($line, 'lint_working.php')) {
+				if (false !== strpos($line, 'Warning:')) { $warn_count++; }
+				if (false !== strpos($line, 'ERROR:')) { $error_count++; }
+			}
+
+			if ((array_key_exists('all', $_GET)) && ('yes' === (string)$_GET['all']))
+			{
+				//----------------------------------------------------------------------------------
+				//	show all lint notices
+				//----------------------------------------------------------------------------------
+				$result .= ''
+				 . "<div class='indent' style='background-color: $bgcolor;'>"
+				 . "<tt><small>\n" . htmlentities($line) . "</small></tt>"
+				 . "</div>\n";
+
+			}
+			else
+			{
+				//----------------------------------------------------------------------------------
+				//	show only those notices which originate in the working file
+				//----------------------------------------------------------------------------------
+				if (false !== strpos($line, 'lint_working.php'))
+				{
+					$line = (string)str_replace("./web/lint_working.php:", 'line ', $line);
+					$result .= ''
+					 . "<div class='indent' style='background-color: $bgcolor;'>"
+					 . "<tt><small>\n" . htmlentities($line) . "</small></tt>"
+					 . "</div>\n";
+
+				}
+			}
+
+			//--------------------------------------------------------------------------------------
+			//	special cases
+			//--------------------------------------------------------------------------------------
+			if (false !== strpos($line, 'Overall test')) {
+				$all_url = 'lint.php?mode=lint&file=' . (string)$_GET['file'] . '&all=yes';
+				$all_link = '' . "<a href='$all_url'>[show all test results]</a>";
+
+				if ((true == array_key_exists('all', $_GET) && ('yes' === (string)$_GET['all'])))
+				{
+					$all_url = 'lint.php?mode=lint&file=' . (string)$_GET['file'];
+					$all_link = '' . "<a href='$all_url'>[show only results for current file]</a>";
+				}
+
+				lint_add_nav('', $line . "<br/>" . $all_link, '#aaa');
+			}
+
+			if (false !== strpos($line, 'FATAL ERROR'))
+			{
+				lint_add_nav('Testing Incomplete', "<small>" . htmlentities($line) . "</small>", '#faa');
+			}
+
+		}
+
+		$test_counts = "Results for this file: $error_count errors, $warn_count warnings.";
+		lint_add_nav('', $test_counts, '#aaa');		
+
+		return $result;
+	}
+
+	//----------------------------------------------------------------------------------------------
+	//	5. PHP Call Graph
+	//----------------------------------------------------------------------------------------------
+
+	/**
+	 *	Run phpcallgraph from PHP CLI, uses graphviz to generate a graphic
+	 *
+	 *	@param	string	$test_file		Location relative to INSTALL_PATH
+	 *	@param	string	$working_file	Location relative to INSTALL_PATH
+	 *	@return	string					HTML report
+	 */
+
+	function phpcallgraph_diagram($test_file, $working_file)
+	{
+		global $call_graph;
+		global $content;
+
+		//------------------------------------------------------------------------------------------
+		//	PCG configuration
+		//------------------------------------------------------------------------------------------
+		$report = '';
+		$graph_file = 'web/doc/' . (string)str_replace(dirname($test_file), '', $test_file) . '.png';
+		$graph_file = INSTALL_PATH . (string)str_replace('//', '/', $graph_file);
+		$graph_url = str_replace(INSTALL_PATH . 'web/', '/', $graph_file);
+
+		if (false == file_exists(INSTALL_PATH . 'web/doc/')) { @mkdir(INSTALL_PATH . 'web/doc/'); }
+
+		//------------------------------------------------------------------------------------------
+		//	run via shell
+		//------------------------------------------------------------------------------------------
+		$shell_cmd = "php " . PCG_PATH . " -f png -o $graph_file " . INSTALL_PATH . $test_file;;
+
+		$result = array();
+		exec($shell_cmd, $result);
+
+		//------------------------------------------------------------------------------------------
+		//	check if it worked
+		//------------------------------------------------------------------------------------------
+		//	(TODO)
+
+		//------------------------------------------------------------------------------------------
+		//	run via shell
+		//------------------------------------------------------------------------------------------
+		$call_graph = ''
+		 . "<a href='$graph_url'>"
+		 . "<img src='$graph_url' width='500px' style='border-radius: 10px;' /></a><br/>\n";
+
+		$report .= ''
+		 . "<div class='indent' style='background-color: #555;'>"
+		 . "<h3>Running</h3>\n"
+		 . "<div class='indent' style='background-color: #555; margin-left: 20px; color: #fff;'>"
+		 . "<tt><small>\n" . htmlentities($shell_cmd) . "</small></tt>"
+		 . "</div>\n"
+		 . "</div>\n";
+
+		//lint_add_nav('Generating call graph', $report, '#555');
+		return $report;
+	}
+
+
+?>

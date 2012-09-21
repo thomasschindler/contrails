@@ -1,0 +1,10 @@
+
+AddCharset UTF-8 .php .html
+AddDefaultCharset UTF-8
+
+RewriteEngine on
+RewriteBase /
+RewriteCond %{QUERY_STRING} ^(.*)$
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^([a-z0-9/+_-]*).*$ /index.php?%1&file=$0
+

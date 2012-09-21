@@ -1,0 +1,29 @@
+<?php
+/**
+*	@package	aclconf
+* konfigurationsdatei der zugriffsrechte f�r seiten
+*/
+
+$conf = array(
+	'rights' => array(
+		'view'   => 1,
+		'edit'   => 4,
+		'delete' => 8,
+		'new'    => 16,
+		'acl'    => 32,
+		'ar_mod' => 64,
+		'move'	 => 128,
+		
+	),
+	'labels' => array(
+		'view'   => e::o('acl_view',null,null,'page'),
+		'edit'   => e::o('acl_edit',null,null,'page'),
+		'delete' => e::o('acl_delete',null,null,'page'),
+		'new'    => e::o('acl_new',null,null,'page'),
+		'acl'    => e::o('acl_acl',null,null,'page'),
+		'ar_mod' => e::o('acl_ar_mod',null,null,'page'),
+		'move'	 => e::o('acl_move',null,null,'page'),
+	),
+);
+
+?>
