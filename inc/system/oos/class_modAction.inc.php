@@ -525,6 +525,18 @@ class modAction {
 	}
 	
 	/**
+	* create and return a link
+	*/
+	function lnk($a)
+	{
+		if(!isset($a['mod']))
+		{
+			$a['mod'] = $this->mod_name;
+		}
+		return $this->OPC->lnk($a);
+	}
+	
+	/**
 	 *	Initiialization, set standard values
 	 *	(TRANSLATEME)
 	 *	[de] initialisierung, setzen von standard-werten

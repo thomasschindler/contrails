@@ -332,101 +332,64 @@ class e
 	*/
 	function o($key = null,$replace = null,$case = false,$page = null){	
 
-		$debug = false;
-		if($debug)
-		{
-			MC::Debug("NEW CALL: ".$key,"-------------------------------------");
-		}
 		if(!$key)
 		{
 			return;
 		}
 		$opc = &OPC::singleton();
+
 		if($page)
 		{
 			$target_folder = $page;
-			if($debug)
-			{
-				MC::debug($target_folder,'page');
-			}
+		}
+		elseif($opc->current_mod())
+		{
+			$target_folder = $opc->current_mod();
+		}
+		elseif(UTIL::get_post('mod'))
+		{
+			$target_folder = UTIL::get_post('mod');
 		}
 		elseif($opc->lang_page())
 		{
 			$target_folder = $opc->lang_page();
-			if($debug)
+		}
+		elseif(@$this->mod_name)
+		{
+			$target_folder = $this->mod_name;
+		}
+		else
+		{
+			switch(strtolower(get_class($this)))
 			{
-				MC::debug($target_folder,'opc');
-			}
-		}
-		
-		elseif(@$this->mod_name){
-
-			switch($this->mod_name){
-				case 'container':
-					$info = get_object_vars($this);
-					$mod = explode('_',get_class($this));
-					$target_folder = $info['mod'] ? $info['mod'] : $mod[0];
-
-					if($debug)
-					{
-						MC::debug($target_folder,"1");
-					}
-					
-				break;
-				default:
-					$target_folder = $this->mod_name;
-					if($debug)
-					{
-						MC::debug($target_folder,"2");
-					}
-			}
-		}
-		else{
-			switch(strtolower(get_class($this))){
 				case 'form':
 					$info = get_object_vars($this);
 					$target_folder = $opc->current_mod();
-if($debug){
-	MC::debug($target_folder,"3");
-}
 				break;
 				case 'mc':
 					$info = get_object_vars($this);
 					$target_folder = UTIL::get_post('mod');
-if($debug){
-	MC::debug($target_folder,"4");
-}
 				break;
 				case 'opc':
 					$info = get_object_vars($this);
 					if(@$info['position_info']['mod_name']){
 						$target_folder = $info['position_info']['mod_name'];
-if($debug){
-	MC::debug($target_folder,"5");
-}
 					}
 					elseif(@$info['start_view'][1]){
 						$target_folder = $info['start_view'][1];
-if($debug){
-	MC::debug($target_folder,"6");
-}
+
 					}
 					else{
 						$target_folder = 'system/'.get_class($this);
-if($debug){
-	MC::debug($target_folder,"7");
-}
 					}
 				break;
 				default:
 				
 					$target_folder = 'system/'.get_class($this);
-if($debug){
-	MC::debug($target_folder,"8");
-}
 			}
 		}
 		
+
 		$lang_folder = defined('USR_LANG_LOG') ? USR_LANG_LOG : USR_LANG;
 //		die(USR_LANG);
 		if(is_file(CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.$lang_folder.'.php'))

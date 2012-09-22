@@ -45,11 +45,29 @@ class FORMS
 	var $error_fields = array();
 	var $form_name;
 	
-	function FORMS() 
+	function FORMS($form=null)
 	{
 		$this->OPC = &OPC::singleton();
+		if($form)
+		{
+			$this->create($form);
+		}
 	}
 	
+	/**
+	* validate the form
+	*/
+	function valid($mode='enter')
+	{
+		$v = new validator($this->conf);
+		if(!$v->is_valid(UTIL::get_post('data'),$mode))
+		{
+			// set the errorfields
+			$this->set_error_fields($v->get_error_fields());
+			return false;
+		}
+		return true;
+	}
 
 	/**
 	*	replacement for init with more practical interface
@@ -59,24 +77,47 @@ class FORMS
 	*/
 	function create($form,$mod=null)
 	{
-		$this->mod = $mod;
 		
 		if ($form == '') return;
-		
+	
+		if($mod == null)
+		{
+			if($this->OPC->current_mod())
+			{
+				$mod = $this->OPC->current_mod();
+			}
+			else
+			{
+				$mod = UTIL::get_post('mod');
+			}
+		}
+		$this->mod = $mod;
+
 		if(is_array($form))
 		{
 			$this->conf  = $form;
-			$this->active_fields = array_keys($this->conf['fields']);
-			return;
+		}
+		else
+		{
+			$this->conf  = MC::table_config($form,$mod);
 		}
 		
-		$this->conf  = MC::table_config($form,$mod);
 		$this->table = $form;
 		$this->active_fields = array_keys($this->conf['fields']);
 		if(isset($this->OPC->set_error_fields))
 		{
 			$this->error_fields = $this->OPC->set_error_fields;
 		}
+		// init the forms
+		if($this->conf['buttons'])
+		{
+			foreach($this->conf['buttons'] as $event => $label)
+			{
+				$this->button($event,$label);
+			}
+		}
+		// add at least the current mod as a hidden field
+		$this->hidden('mod',$this->OPC->current_mod());
 	}
 	
 	/**

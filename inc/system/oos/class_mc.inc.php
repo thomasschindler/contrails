@@ -617,7 +617,7 @@ class MC {
 		$this->mod = $modul;	
 		$ar = $this->get_access_rights($pid, $uid);		// assigned but not used? strix 2012-02-17
 
-		return (($this->access_rights[$mid] & $ar_nr) == $ar_nr);	
+		return (($this->access_rights[$mid] & $ar_nr) == $ar_nr);
 	}
 
 	/**

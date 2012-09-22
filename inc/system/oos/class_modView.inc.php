@@ -318,7 +318,19 @@ class modView {
 
 		return $ret;
 	}
-		
+	
+	/**
+	* create and return a link
+	*/
+	function lnk($a)
+	{
+		if(!isset($a['mod']))
+		{
+			$a['mod'] = $this->mod_name;
+		}
+		return $this->OPC->lnk($a);
+	}
+
 	/**
 	 *	Set default properties and link framework objects.
 	 *

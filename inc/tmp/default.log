@@ -7904,3 +7904,15 @@ array (
   'event' => 'pa_type',
   'mod' => 'page',
 )
+Sat, 22 Sep 2012 21:56:20 +0200
+array (
+  'directevent' => NULL,
+  'event' => 'pa_ar',
+  'mod' => 'page',
+)
+Sat, 22 Sep 2012 21:56:26 +0200
+array (
+  'directevent' => NULL,
+  'event' => 'pa_ar',
+  'mod' => 'page',
+)

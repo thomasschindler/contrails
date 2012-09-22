@@ -65,7 +65,7 @@
       ?>
       <div class="row">
         <div class="span10 offsetcontent">
-          
+          <?=$OPC->call('test')?>
         </div>
       </div>
     </div>
