@@ -1,0 +1,1 @@
+this directory is only valid during the initial setup phase and will be removed later
