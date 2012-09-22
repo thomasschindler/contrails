@@ -29,7 +29,7 @@
             <li><a href="">More</a></li>
           </ul>
           <ul class="nav pull-right">
-            <?=$OPC->call('login')?>
+            <?=$OPC->call('usradmin','loginlogout')?>
           </ul>
         </div>
       </div>

@@ -13,14 +13,6 @@
 *	@since			1.0
 *	@access			public
 *	@package		mods
-
-L10N:
-
-the standard tables can be extendend.
-the existing fields need to be untouched!!!
-
-the form and table config files are copied to {NAME}.{PROJECT_NAME}.form
-
 */
 	
 	class usradmin_view extends modView {
@@ -62,6 +54,7 @@ the form and table config files are copied to {NAME}.{PROJECT_NAME}.form
 			
 			switch(strtolower($method_name)) 
 			{
+				case 'loginlogout':				$this->loginlogout();						break;
 				case 'navigation':				$this->navigation();						break;
 				//
 				case 'du':								$this->du();											break;
@@ -84,6 +77,21 @@ the form and table config files are copied to {NAME}.{PROJECT_NAME}.form
 			
 		}
 		
+		function loginlogout()
+		{
+			if($this->CLIENT->usr['is_default'])
+			{
+			$f = new forms();
+            $f->create('login');
+            $f->button('login',e::o('login'));
+            $f->hidden('mod','usradmin');
+
+				echo '<li class="dropdown"><a class="dropdown-toggle" href="#" data-toggle="dropdown">Login<strong class="caret"></strong></a><div class="dropdown-menu" style="padding: 15px; padding-bottom: 0px;">'.$f->show().'</div></li>';
+				return;
+			}
+			echo '<li><a href="'.$this->OPC->lnk(array('event'=>'logout','mod'=>'usradmin')).'">Logout [ '.$this->CLIENT->usr['usr'].' ]</a></li>';
+		}
+
 		/**
 		*	create the view for the top navigation
 		*/

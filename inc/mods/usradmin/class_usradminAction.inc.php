@@ -51,6 +51,10 @@
 
 			switch(strtolower($action['event'])) 
 			{
+				// login
+				case 'login':					$this->login();							break;
+				case 'logout':					$this->logout();						break;
+
 				// add a user from outside
 				case 'usr_create':				return $this->usr_create($params);						break;
 				//
@@ -102,6 +106,89 @@
 			
 		}
 		
+
+		/**
+		*	logs the user out
+		*/
+		function logout($params)
+		{
+			if($_COOKIE[CONF::project_name()])
+			{
+				setcookie(CONF::project_name(),"",-3600,"/",substr(CONF::baseurl(),7));
+			}
+			$this->CLIENT->unset_auth();
+			$delete = "DELETE FROM ".$this->tbl_online." WHERE uid = ".$this->CLIENT->usr['id'];
+			$this->DB->query($delete);
+			if(!$params['quiet'])
+			{
+				header("Location:".CONF::baseurl());
+			}
+		}
+		/**
+		*	try and log the user on
+		*/
+		function login() 
+		{
+			$usr = trim($this->data['usr']);
+			$pwd = trim($this->data['pwd']);			
+
+			//-- login fuer usr
+			$check = $this->MC->call_action(array('mod' => 'usradmin', 'event' => 'usr_validate'), $this->data);
+			
+			if (is_error($check)) 
+			{
+				forms::set_error_fields(array('usr'=>true,'pwd'=>true));
+				$this->OPC->error($check->txt);
+				return $this->set_start_view('login_show');
+			}
+			else 
+			{
+				setcookie(CONF::project_name(),md5($check['usr']),time()+86400,"/",substr(CONF::baseurl(),7));
+				$this->CLIENT->set_auth($check);
+
+				// we need to refresh the window.location of the opener
+
+				// the user may have requested a specific page before logging in, so we send her there,
+			   	
+				$url = $this->SESS->get('after_login','url');
+				if($url)
+				{
+					header('Location:'.$url);
+					die;
+				}
+
+				$p = CONF::default_pages();
+				
+				// this page is not allowed to registered users usually - so we redirect them
+				if($this->pid == $p['usr_register'])
+				{
+					if($p['after_login'])
+					{         
+						header('Location:'.CONF::baseurl().$this->OPC->lnk(array('pid'=>$p['after_login'])));
+						//header('Location:'.CONF::baseurl()."/page_".$p['after_login'].".html?".$this->SESS->name."=".$this->SESS->id);
+						die;
+					}
+					else
+					{
+						header('Location:'.CONF::baseurl().$this->OPC->lnk(array('pid'=>CONF::pid())));
+						die;
+					}
+				}
+				elseif($p['after_login'])
+				{             
+					header('Location:'.CONF::baseurl().$this->OPC->lnk(array('pid'=>$p['after_login'])));
+					//header('Location:'.CONF::baseurl()."/page_".$p['after_login'].".html?".$this->SESS->name."=".$this->SESS->id);
+					die;
+				}
+				else
+				{
+					header('Location:'.CONF::baseurl().$this->OPC->lnk(array('pid'=>$this->pid)));
+					die;
+				}
+				ob_end_flush();
+			}
+		}
+
 		function usr_create($p)
 		{
 			
