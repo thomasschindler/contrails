@@ -80,7 +80,7 @@ function models()
 		{
 			$table = substr($file,0,-4);
 			include($base."script/resources/migrate/".$file);
-			$s = "<?\nclass models_abstract_".$table." extends model\n{\n";
+			$s = "<?\nclass generated_".$table." extends model\n{\n";
 			// add some vars
 			$s .= "\tvar \$_fields = array();\n";
 			$s .= "\tvar \$_table = '".$table."';\n";
@@ -117,7 +117,12 @@ function models()
 ";
 			}
 			$s .= "}\n?>";
-			file_put_contents($base."inc/models/abstract/".$table.".php", $s);
+			if(!is_dir($base."inc/models/".$table))
+			{
+				mkdir($base."inc/models/".$table);
+			}
+			file_put_contents($base."inc/models/".$table."/generated.php", $s);
+			file_put_contents($base."inc/models/".$table."/model.php", "<?class ".$table." extends generated_".$table." {} ?>");
 		}
 	}
 }
