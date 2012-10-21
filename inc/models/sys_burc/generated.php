@@ -4,10 +4,16 @@ class generated_sys_burc extends model
 	var $_fields = array();
 	var $_table = 'sys_burc';
 
-	protected function _primary()
+	protected function _keys()
 	{
 		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'burc',),),);
 	}
+
+	protected function _fields()
+	{
+		return array('burc' => array('Field' => 'burc','Type' => 'varchar(20)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'data' => array('Field' => 'data','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_date_created' => array('Field' => 'sys_date_created','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'permanent' => array('Field' => 'permanent','Type' => 'tinyint(1)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
+	}
+
 
 	function burc($d=null)
 	{

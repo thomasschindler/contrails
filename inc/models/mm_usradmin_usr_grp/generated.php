@@ -4,10 +4,16 @@ class generated_mm_usradmin_usr_grp extends model
 	var $_fields = array();
 	var $_table = 'mm_usradmin_usr_grp';
 
-	protected function _primary()
+	protected function _keys()
 	{
 		return array('0' => array('type' => 'KEY','fields' => array('0' => 'local_id','1' => 'foreign_id',),),);
 	}
+
+	protected function _fields()
+	{
+		return array('local_id' => array('Field' => 'local_id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'MUL','Default' => NULL,'Extra' => '',),'foreign_id' => array('Field' => 'foreign_id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
+	}
+
 
 	function local_id($d=null)
 	{

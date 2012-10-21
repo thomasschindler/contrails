@@ -16,10 +16,16 @@ class generated_sys_vid extends model
 		),
 	);
 
-	protected function _primary()
+	protected function _keys()
 	{
 		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'vid','1' => 'pid',),),'1' => array('type' => 'KEY','fields' => array('0' => 'test',),),);
 	}
+
+	protected function _fields()
+	{
+		return array('vid' => array('Field' => 'vid','Type' => 'varchar(32)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => '','Extra' => '',),'mod_name' => array('Field' => 'mod_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
+	}
+
 
 	function vid($d=null)
 	{

@@ -4,10 +4,16 @@ class generated_mod_page_acl extends model
 	var $_fields = array();
 	var $_table = 'mod_page_acl';
 
-	protected function _primary()
+	protected function _keys()
 	{
 		return array('0' => array('type' => 'KEY','fields' => array('0' => 'id','1' => 'aid',),),);
 	}
+
+	protected function _fields()
+	{
+		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'MUL','Default' => NULL,'Extra' => '',),'type' => array('Field' => 'type','Type' => 'int(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'aid' => array('Field' => 'aid','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'ar' => array('Field' => 'ar','Type' => 'int(32) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'inherit_pid' => array('Field' => 'inherit_pid','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
+	}
+
 
 	function id($d=null)
 	{

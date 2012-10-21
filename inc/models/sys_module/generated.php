@@ -4,10 +4,16 @@ class generated_sys_module extends model
 	var $_fields = array();
 	var $_table = 'sys_module';
 
-	protected function _primary()
+	protected function _keys()
 	{
 		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'id',),),);
 	}
+
+	protected function _fields()
+	{
+		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'modul_name' => array('Field' => 'modul_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'label' => array('Field' => 'label','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'smallint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'virtual' => array('Field' => 'virtual','Type' => 'tinyint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
+	}
+
 
 	function id($d=null)
 	{
