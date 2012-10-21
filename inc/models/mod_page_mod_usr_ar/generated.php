@@ -4,6 +4,11 @@ class generated_mod_page_mod_usr_ar extends model
 	var $_fields = array();
 	var $_table = 'mod_page_mod_usr_ar';
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'KEY','fields' => array('0' => 'pid','1' => 'uid','2' => 'mid',),),);
+	}
+
 	function pid($d=null)
 	{
 		if($d !== null)

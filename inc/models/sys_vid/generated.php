@@ -16,6 +16,11 @@ class generated_sys_vid extends model
 		),
 	);
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'vid','1' => 'pid',),),'1' => array('type' => 'KEY','fields' => array('0' => 'test',),),);
+	}
+
 	function vid($d=null)
 	{
 		if($d !== null)

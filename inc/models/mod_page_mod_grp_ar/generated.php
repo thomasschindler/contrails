@@ -4,6 +4,11 @@ class generated_mod_page_mod_grp_ar extends model
 	var $_fields = array();
 	var $_table = 'mod_page_mod_grp_ar';
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'KEY','fields' => array('0' => 'pid','1' => 'gid','2' => 'mid',),),);
+	}
+
 	function pid($d=null)
 	{
 		if($d !== null)

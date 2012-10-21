@@ -4,6 +4,11 @@ class generated_sys_burc extends model
 	var $_fields = array();
 	var $_table = 'sys_burc';
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'burc',),),);
+	}
+
 	function burc($d=null)
 	{
 		if($d !== null)

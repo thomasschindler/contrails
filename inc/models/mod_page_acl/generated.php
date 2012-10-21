@@ -4,6 +4,11 @@ class generated_mod_page_acl extends model
 	var $_fields = array();
 	var $_table = 'mod_page_acl';
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'KEY','fields' => array('0' => 'id','1' => 'aid',),),);
+	}
+
 	function id($d=null)
 	{
 		if($d !== null)

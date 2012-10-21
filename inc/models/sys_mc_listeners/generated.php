@@ -4,6 +4,11 @@ class generated_sys_mc_listeners extends model
 	var $_fields = array();
 	var $_table = 'sys_mc_listeners';
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'KEY','fields' => array('0' => 'id',),),);
+	}
+
 	function id($d=null)
 	{
 		if($d !== null)

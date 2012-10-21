@@ -4,6 +4,11 @@ class generated_mod_usradmin_usr extends model
 	var $_fields = array();
 	var $_table = 'mod_usradmin_usr';
 
+	protected function _primary()
+	{
+		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'id',),),);
+	}
+
 	function id($d=null)
 	{
 		if($d !== null)
