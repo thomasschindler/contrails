@@ -1,5 +1,5 @@
 <?
-class models_abstract_sys_mc_listeners extends model
+class generated_sys_mc_listeners extends model
 {
 	var $_fields = array();
 	var $_table = 'sys_mc_listeners';

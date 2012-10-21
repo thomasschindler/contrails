@@ -1,5 +1,5 @@
 <?
-class models_abstract_sys_log extends model
+class generated_sys_log extends model
 {
 	var $_fields = array();
 	var $_table = 'sys_log';

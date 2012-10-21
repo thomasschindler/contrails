@@ -19,6 +19,11 @@ class test_view extends modView
 	*/
 	function test()
 	{
+
+		$b = new sys_burc();
+
+		MC::debug($b);
+
 		if($this->access('test'))
 		{
 			$this->set_var('link',$this->lnk(array('event' => 'test')));

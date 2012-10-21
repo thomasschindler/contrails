@@ -1,0 +1,1 @@
+<?class mod_page_acl extends generated_mod_page_acl {} ?>

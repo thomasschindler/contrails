@@ -1,5 +1,5 @@
 <?
-class models_abstract_mm_usradmin_usr_grp extends model
+class generated_mm_usradmin_usr_grp extends model
 {
 	var $_fields = array();
 	var $_table = 'mm_usradmin_usr_grp';

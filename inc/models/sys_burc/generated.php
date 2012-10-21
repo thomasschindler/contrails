@@ -1,5 +1,5 @@
 <?
-class models_abstract_sys_burc extends model
+class generated_sys_burc extends model
 {
 	var $_fields = array();
 	var $_table = 'sys_burc';

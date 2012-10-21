@@ -1,8 +1,8 @@
 <?
-class models_abstract_mod_page_mod_usr_ar extends model
+class generated_mod_page_mod_grp_ar extends model
 {
 	var $_fields = array();
-	var $_table = 'mod_page_mod_usr_ar';
+	var $_table = 'mod_page_mod_grp_ar';
 
 	function pid($d=null)
 	{
@@ -18,7 +18,7 @@ class models_abstract_mod_page_mod_usr_ar extends model
 		return $this->_fields['pid'];
 	}
 
-	function uid($d=null)
+	function gid($d=null)
 	{
 		if($d !== null)
 		{
@@ -26,10 +26,10 @@ class models_abstract_mod_page_mod_usr_ar extends model
 			{
 				return false;
 			}
-			$this->_fields['uid'] = $d;
+			$this->_fields['gid'] = $d;
 			return true;
 		}
-		return $this->_fields['uid'];
+		return $this->_fields['gid'];
 	}
 
 	function mid($d=null)

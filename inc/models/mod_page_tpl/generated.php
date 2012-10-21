@@ -1,8 +1,8 @@
 <?
-class models_abstract_sys_module extends model
+class generated_mod_page_tpl extends model
 {
 	var $_fields = array();
-	var $_table = 'sys_module';
+	var $_table = 'mod_page_tpl';
 
 	function id($d=null)
 	{
@@ -18,7 +18,7 @@ class models_abstract_sys_module extends model
 		return $this->_fields['id'];
 	}
 
-	function modul_name($d=null)
+	function tpl_name($d=null)
 	{
 		if($d !== null)
 		{
@@ -26,10 +26,10 @@ class models_abstract_sys_module extends model
 			{
 				return false;
 			}
-			$this->_fields['modul_name'] = $d;
+			$this->_fields['tpl_name'] = $d;
 			return true;
 		}
-		return $this->_fields['modul_name'];
+		return $this->_fields['tpl_name'];
 	}
 
 	function label($d=null)
@@ -58,20 +58,6 @@ class models_abstract_sys_module extends model
 			return true;
 		}
 		return $this->_fields['sys_trashcan'];
-	}
-
-	function virtual($d=null)
-	{
-		if($d !== null)
-		{
-			if(!$this->_valid($d,'tinyint',1))
-			{
-				return false;
-			}
-			$this->_fields['virtual'] = $d;
-			return true;
-		}
-		return $this->_fields['virtual'];
 	}
 }
 ?>

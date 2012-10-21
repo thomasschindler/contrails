@@ -1,8 +1,8 @@
 <?
-class models_abstract_mod_page_tpl extends model
+class generated_mod_usradmin_grp extends model
 {
 	var $_fields = array();
-	var $_table = 'mod_page_tpl';
+	var $_table = 'mod_usradmin_grp';
 
 	function id($d=null)
 	{
@@ -18,21 +18,21 @@ class models_abstract_mod_page_tpl extends model
 		return $this->_fields['id'];
 	}
 
-	function tpl_name($d=null)
+	function pid($d=null)
 	{
 		if($d !== null)
 		{
-			if(!$this->_valid($d,'varchar',255))
+			if(!$this->_valid($d,'int',10))
 			{
 				return false;
 			}
-			$this->_fields['tpl_name'] = $d;
+			$this->_fields['pid'] = $d;
 			return true;
 		}
-		return $this->_fields['tpl_name'];
+		return $this->_fields['pid'];
 	}
 
-	function label($d=null)
+	function name($d=null)
 	{
 		if($d !== null)
 		{
@@ -40,17 +40,31 @@ class models_abstract_mod_page_tpl extends model
 			{
 				return false;
 			}
-			$this->_fields['label'] = $d;
+			$this->_fields['name'] = $d;
 			return true;
 		}
-		return $this->_fields['label'];
+		return $this->_fields['name'];
+	}
+
+	function lang($d=null)
+	{
+		if($d !== null)
+		{
+			if(!$this->_valid($d,'int',2))
+			{
+				return false;
+			}
+			$this->_fields['lang'] = $d;
+			return true;
+		}
+		return $this->_fields['lang'];
 	}
 
 	function sys_trashcan($d=null)
 	{
 		if($d !== null)
 		{
-			if(!$this->_valid($d,'smallint',1))
+			if(!$this->_valid($d,'tinyint',1))
 			{
 				return false;
 			}

@@ -1,0 +1,1 @@
+<?class mod_usradmin_grp extends generated_mod_usradmin_grp {} ?>

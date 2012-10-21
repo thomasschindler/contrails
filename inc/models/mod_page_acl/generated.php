@@ -1,5 +1,5 @@
 <?
-class models_abstract_mod_page_acl extends model
+class generated_mod_page_acl extends model
 {
 	var $_fields = array();
 	var $_table = 'mod_page_acl';

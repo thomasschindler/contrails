@@ -1,23 +1,39 @@
 <?
 	// GLOBAL FUNCTIONS
-
+	static $__autoload_models = array();
 	// autoloader
 	function __autoload($classname) 
 	{
-		if (file_exists(CONF::inc_dir()."//system/oos/class_".strtolower($classname).".inc.php"))
+		global $__autoload_models;
+		// handle models:
+		if(count($__autoload_models) == 0)
 		{
-			require CONF::inc_dir()."//system/oos/class_".strtolower($classname).".inc.php";
+			$__autoload_models = scandir(CONF::inc_dir()."/models/");
 		}
-		elseif (file_exists(CONF::inc_dir()."//system/flourish/".$classname.".php"))
+
+		if(in_array($classname,$__autoload_models))
 		{
-			require CONF::inc_dir()."//system/flourish/".$classname.".php";
+			require_once require CONF::inc_dir()."/system/oos/class_model.inc.php";
+			require_once CONF::inc_dir()."/models/".strtolower($classname)."/generated.php";
+			require_once CONF::inc_dir()."/models/".strtolower($classname)."/model.php";
+			return;
 		}
-		elseif(file_exists(CONF::inc_dir()."//system/".preg_replace("/_/", "/", $classname).".php"))
+		// 
+		if (file_exists(CONF::inc_dir()."/system/oos/class_".strtolower($classname).".inc.php"))
 		{
-			require CONF::inc_dir()."//system/".preg_replace("/_/", "/", $classname).".php";
+			require CONF::inc_dir()."/system/oos/class_".strtolower($classname).".inc.php";
+		}
+		elseif (file_exists(CONF::inc_dir()."/system/flourish/".$classname.".php"))
+		{
+			require CONF::inc_dir()."/system/flourish/".$classname.".php";
+		}
+		elseif(file_exists(CONF::inc_dir()."/system/".preg_replace("/_/", "/", $classname).".php"))
+		{
+			require CONF::inc_dir()."/system/".preg_replace("/_/", "/", $classname).".php";
 		}
 		else
 		{
+			print_r($__autoload_models);
 			die("Class not found ".$classname." [0]");
 		}
 		if (!class_exists($classname)) 

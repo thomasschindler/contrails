@@ -1,0 +1,1 @@
+<?class sys_module extends generated_sys_module {} ?>
