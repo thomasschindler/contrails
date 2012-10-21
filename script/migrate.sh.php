@@ -100,7 +100,6 @@ function models()
 	{
 		return array(".array2string($config['fields'],2,true).");
 	}
-
 ";
 			// create the getter/setter method(s) (include some validation)
 			foreach($config['fields'] as $field)
