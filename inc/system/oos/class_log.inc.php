@@ -53,7 +53,35 @@ class log
 		*/
 		return;
 	}
-	
+
+	public static function err($msg){
+		return self::msg($msg, error_message_level::error);
+	}	
+
+	public static function warn($msg){
+		return self::msg($msg, error_message_level::warning);
+	}
+
+	public static function dbg($msg){
+		return self::msg($msg, error_message_level::debug);	
+	}
+
+	public static function msg($text, $level){
+		$logpath = CONF::logpath() . CONF::project_name() . "/" . date("Ymd") . "/" . session_id();
+		mkdir($logpath, "0777", true);
+
+		switch ($level) {
+			case error_message_level::error:
+				//@todo: Decide on a message body!
+				mail(CONF::notification(), CONF::project_name() . ' - Error (Session: ' . session_id(), $msg);
+			case error_message_level::warning:
+			case error_message_level::debug:
+				$logpath = CONF::log_path() . date("") . "/" . session_id();
+				mkdir($logpath, '0777', true);
+				MC::log("Message >> Level " . error_message_level::s($level) . " >> $msg", "messages.log" , $logpath);
+				break;
+		}
+	}
 	
 	/**
 	 *	start - notes the moment logging has started
