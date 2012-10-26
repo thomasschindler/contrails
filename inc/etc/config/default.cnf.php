@@ -60,7 +60,7 @@ class HOST_CONF
 				'db_host' => 'localhost',
 				'db_user' => 'root',
 				'db_pass' => 'root', 
-				'db_name' => 'contrails',
+				'db_name' => 'unfucktheplanet',
 			)
 		);
 	}
