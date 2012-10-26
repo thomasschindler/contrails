@@ -1,0 +1,1 @@
+<?class sys_vid extends generated_sys_vid {} ?>

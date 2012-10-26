@@ -1,0 +1,1 @@
+<?class sys_mc_listeners extends generated_sys_mc_listeners {} ?>

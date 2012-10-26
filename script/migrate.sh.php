@@ -89,6 +89,18 @@ function models()
 			{
 				$s .= "\tvar \$_relations = array\n\t(\n".array2string($config['relations'],2)."\t);\n";
 			}
+			// 
+	$s .= "
+	protected function _keys()
+	{
+		return array(".array2string($config['keys'],2,true).");
+	}
+
+	protected function _fields()
+	{
+		return array(".array2string($config['fields'],2,true).");
+	}
+";
 			// create the getter/setter method(s) (include some validation)
 			foreach($config['fields'] as $field)
 			{
@@ -291,7 +303,7 @@ function db_get()
 *	return a nice string represenation of an array
 */
 
-function array2string($a,$l=1)
+function array2string($a,$l=1,$inline=false)
 {
 	$s = '';
 	if($l == 1)
@@ -329,6 +341,11 @@ function array2string($a,$l=1)
 	if($l == 1)
 	{
 		$s .= "\n);\n?>";
+	}
+	if($inline === true)
+	{
+		$s = preg_replace("/\n/","",$s);
+		$s = preg_replace("/\t/","",$s);
 	}
 	return $s;
 }

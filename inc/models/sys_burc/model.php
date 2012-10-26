@@ -1,0 +1,1 @@
+<?class sys_burc extends generated_sys_burc {} ?>

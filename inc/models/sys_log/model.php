@@ -1,0 +1,1 @@
+<?class sys_log extends generated_sys_log {} ?>

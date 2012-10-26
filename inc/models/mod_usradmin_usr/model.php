@@ -1,0 +1,1 @@
+<?class mod_usradmin_usr extends generated_mod_usradmin_usr {} ?>

@@ -1,0 +1,1 @@
+<?class mod_page extends generated_mod_page {} ?>

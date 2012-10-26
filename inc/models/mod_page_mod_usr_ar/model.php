@@ -1,0 +1,1 @@
+<?class mod_page_mod_usr_ar extends generated_mod_page_mod_usr_ar {} ?>

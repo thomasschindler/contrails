@@ -1,8 +1,19 @@
 <?
-class models_abstract_mod_page_tpl extends model
+class generated_mod_page_tpl extends model
 {
 	var $_fields = array();
 	var $_table = 'mod_page_tpl';
+
+	protected function _keys()
+	{
+		return array('0' => array('type' => 'PRIMARY KEY','fields' => array('0' => 'id',),),);
+	}
+
+	protected function _fields()
+	{
+		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'tpl_name' => array('Field' => 'tpl_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'label' => array('Field' => 'label','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'smallint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
+	}
+
 
 	function id($d=null)
 	{
