@@ -456,9 +456,9 @@ class db_crud
 	 *
 	 *	Please check $this->err_msg on failure.
 	 *
-	 *	@param	string	$table_name		Name of an extant database table
+	 *	@param	string	$table_name		Name of an existant database table
 	 *	@param	string	$field_name		Name of field containing unique identifier, eg, PriKey
-	 *	@param	string	$identifier		Value uniqely identifying a record
+	 *	@param	string	$identifier		Value uniquely identifying a record
 	 *	@return	bool
 	 */
 

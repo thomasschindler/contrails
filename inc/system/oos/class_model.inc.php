@@ -8,15 +8,126 @@ abstract class model{
 				mstack::Load 	=> null,
 				mstack::Update 	=> null,
 				mstack::Current => null,
-				//mstack::Final 	=> null
+				mstack::Done 	=> null
 			);
 
-	public function exists(){
-		return !is_null($this->_state[mstack::Load]);
+	private function __construct(){
+		MF::store(&$this);		
+	} 
+
+	public static function new($class, $data){
+		if(!class_exists($class)){
+			log::err("Attempted to load an unexisting class in the new method '$class'");
+			return null;
+		}
+
+		$table_name = $class::table_name();
+		$instance = new $class();
+
+		$data = $instance->validate_data($data, true);
+
+		if(empty($data)){
+			log::err("Failed to validate the data sent in.");
+			return null;
+		}
+
+		if($instance->push_create($data) !== return::success){
+			log::err("Failed to push the creation state of the object to the change stack.");
+			return null;
+		}
+
+		return $instance;
+	}	
+
+	public static function fetch($class, $data){
+		if(!class_exists($class)){
+			log::err("Attempted to load an unexisting class in the fetch method '$class'");
+			return null;
+		}
+
+		$table_name = $class::table_name();
+		$CRUD = db_crud::singleton();
+		$rows = $CRUD->load_range($table_name, array('id'), $data);
+		$return = array();
+
+		if($rows->nr() <= 0){
+			return null;
+		}
+
+		while($rows->next()){
+			$instance = MF::obtain($table_name, $rows->f('id'));
+			$return[] = $instance;
+		}
+
+		return $return;
 	}
 
+	public abstract function load($data);
+
+
+	public function clone(){
+		/**
+		 *	@todo
+		 */
+	}
+
+	/**
+	 *	Return the final state of the object, ready for being saved in the Database. Will return a
+	 *	structure with the following data:
+	 *		$return $ array(
+	 *			'action' => factory_actions::Update/Create/Delete/Unchanged
+	 *			'data' => array containing the data that will be passed to the database
+	 * 		)
+	 *
+	 */
+	public function pull(){
+		$action = factory_actions::Unchanged;
+		$data = array();
+
+		if($this->deleted()){
+			$action = factory_actions::Delete;
+		}
+
+		if($this->exists() == false){
+			$action = factory_actions::Create;
+			$data = $this->_state[mstack::Update];
+		}
+
+		if($this->updated() == true){
+			$action = factory_actions::Update;
+			$data = $this->_state[mstack::Update];
+		}
+
+		return array(
+					'action' 	=> $action, 
+					'data' 		=> $data
+				);
+	} 
+
+	/**
+	 *	Does this object have an update pending?
+	 *
+	 *	@return 	bool 	True/False depending on the existence of data in the mstack::Update
+	 *						position of the state array
+	 */
+	public function updated(){
+		return !is_null($this->_state[mstack::Update];);
+	}
+
+
+
+	/**
+	 *	Has this object been changed in any way? (created, deleted or updated)
+	 *
+	 *	@return 	bool 	True/False depending on the existence of data in the Update/Delete
+	 *						positions in the array.
+	 */
 	public function changed(){
-		return !is_null($this->_state[mstack::Update]);
+		return $this->updated() || $this->deleted() || !$this->exists();
+	}
+	
+	public function exists(){
+		return !is_null($this->_state[mstack::Load]);
 	}
 
 	public function deleted(){
@@ -24,19 +135,23 @@ abstract class model{
 	}
 
 	protected function push_load($data){
+		if(!is_null($this->_state[mstack::Load])){
+			log::warn("Attempting to reload an already loaded object. This shouldn't happen.");
+			return return::no_change;
+		}
+
 		$this->_state[mstack::Load] = $data;
+		return return::success;	
 	}
 
 	protected function push_update($data){
-		$this->validate_input($data);
-
-		if($this->changed() === false){
+		if($this->updated() === false){
 			$this->_state[mstack::Update] = $data;
 			return return::success;		
 		}
 
 		if($this->deleted()){
-			$this->err("Cannot update a model that is marked for deletion.");
+			log::err("Cannot update a model that is marked for deletion.");
 			return return::error;
 		}
 
@@ -48,10 +163,8 @@ abstract class model{
 	}
 
 	protected function push_create($data){
-		$this->validate_input($data);
-
 		if($this->exists()){
-			$this->err("Cannot reinsert an object on the database. If you need to clone a row, use the clone method instead.");
+			log::err("Cannot reinsert an object on the database. If you need to clone a row, use the clone method instead.");
 			return return::error;
 		}
 
@@ -62,12 +175,12 @@ abstract class model{
 	
 	protected function push_delete(){
 		if($this->deleted()){
-			$this->warn("Object has already been deleted.");
+			log::warn("Object has already been deleted.");
 			return return::no_change;
 		}
 
 		if($this->changed() || $this->exists() === false){
-			$this->warn("Deleting an updated with pending changes will stop these changes from being written to the Database.");
+			log::warn("Deleting an updated with pending changes will stop these changes from being written to the Database.");
 		}
 
 		$this->_state[mstack::Delete] = true;
@@ -75,36 +188,32 @@ abstract class model{
 		return return::success;
 	}
 
-	protected function err($msg){
-		$this->msg($msg, error_message_level::error)
-	}
+	private function validate_data($data, $complete_unexisting = false){
+		$fields = $this->_fields();
 
-	protected function warn($msg){
-		$this->msg($msg, error_message_level::warning)
-	}
+		foreach($fields as $column => $stats){
+			$field_name = $stats['Field'];
+			$sent_value = false;
 
-	protected function dbg($msg){
-		$this->msg($msg, error_message_level::debug)
-	}
+			if(isset($data[$field_name]) === true){
+				$value = $data[$field_name];
+				$sent_value = true;
+			}elseif($complete_unexisting && is_null($stats['Default']) === false){
+				$value = $stats['Default'];
+			}elseif($complete_unexisting && $stats['Null'] === migrations::Yes){
+				$value = null;
+			}elseif($complete_unexisting){
+				log::err("No value found for column $field_name. Column has no default value and cannot be null.");
+				return null;
+			}
 
-	protected function msg($msg, $level){
-		$logpath = CONF::logpath() . CONF::project_name() . "/" . date("Ymd") . "/" . session_id();
-		mkdir($logpath, "0777", true);
-
-		switch ($level) {
-			case error_message_level::error:
-				//@todo: Decide on a message body!
-				mail(CONF::notification(), CONF::project_name() . ' - Error (Session: ' . session_id(), $msg);
-			case error_message_level::warning:
-			case error_message_level::debug:
-				$logpath = CONF::log_path() . date("") . "/" . session_id();
-				mkdir($logpath, '0777', true);
-				MC::log("Message >> Level " . error_message_level::s($level) . " >> $msg", "messages.log" , $logpath);
-				break;
+			if(!$this->$field_name($value)){
+				log::err("The value " . (empty($value) ? "[NULL]" : "$value") . " was not successfuly set." . (!$sent_value ? " Value fetched from the generated model." : ''));
+				return null;
+			}
 		}
 
-
+		return $data;
 	}
-
 
 }
