@@ -1,0 +1,1 @@
+<?class uftp_locations extends generated_uftp_locations {} ?>

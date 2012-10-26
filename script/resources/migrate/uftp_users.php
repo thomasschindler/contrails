@@ -32,7 +32,7 @@ $config = array
 		'gender' => array
 		(
 			'Field' => 'gender',
-			'Type' => 'enum('M','F')',
+			'Type' => 'enum(\'M\',\'F\')',
 			'Null' => 'YES',
 			'Key' => '',
 			'Default' => NULL,
