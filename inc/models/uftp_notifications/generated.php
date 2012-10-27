@@ -1,7 +1,6 @@
 <?
 class generated_uftp_notifications extends model
 {
-	var $_table = 'uftp_notifications';
 
 	protected function _keys()
 	{
@@ -12,6 +11,12 @@ class generated_uftp_notifications extends model
 	{
 		return array('id' => array('Field' => 'id','Type' => 'int(11) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => 'auto_increment',),'message' => array('Field' => 'message','Type' => 'text','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'user_id' => array('Field' => 'user_id','Type' => 'int(11)','Null' => 'YES','Key' => 'MUL','Default' => NULL,'Extra' => '',),'fuck_id' => array('Field' => 'fuck_id','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'unfuck_id' => array('Field' => 'unfuck_id','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'created_at' => array('Field' => 'created_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'updated_at' => array('Field' => 'updated_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
+
+	public function table_name()
+	{
+		return 'uftp_notifications';
+	}
+
 
 	public function id($d=null)
 	{

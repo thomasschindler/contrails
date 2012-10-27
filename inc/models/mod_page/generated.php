@@ -1,7 +1,6 @@
 <?
 class generated_mod_page extends model
 {
-	var $_table = 'mod_page';
 
 	protected function _keys()
 	{
@@ -12,6 +11,12 @@ class generated_mod_page extends model
 	{
 		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'name' => array('Field' => 'name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'url' => array('Field' => 'url','Type' => 'text','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'title' => array('Field' => 'title','Type' => 'varchar(255)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'description' => array('Field' => 'description','Type' => 'text','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'keywords' => array('Field' => 'keywords','Type' => 'text','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'lft' => array('Field' => 'lft','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'rgt' => array('Field' => 'rgt','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'root_id' => array('Field' => 'root_id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'parent_id' => array('Field' => 'parent_id','Type' => 'int(11) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'set_ignore' => array('Field' => 'set_ignore','Type' => 'tinyint(1)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'template_name' => array('Field' => 'template_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'rights' => array('Field' => 'rights','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'structure' => array('Field' => 'structure','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'lost_mods' => array('Field' => 'lost_mods','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'smallint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_date_created' => array('Field' => 'sys_date_created','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_date_changed' => array('Field' => 'sys_date_changed','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'cookie_name' => array('Field' => 'cookie_name','Type' => 'varchar(255)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'cookie_lifetime' => array('Field' => 'cookie_lifetime','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'cookie_value' => array('Field' => 'cookie_value','Type' => 'varchar(255)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'redirect_to' => array('Field' => 'redirect_to','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
+
+	public function table_name()
+	{
+		return 'mod_page';
+	}
+
 
 	public function id($d=null)
 	{

@@ -1,7 +1,6 @@
 <?
 class generated_sys_vid extends model
 {
-	var $_table = 'sys_vid';
 
 	protected function _keys()
 	{
@@ -12,6 +11,12 @@ class generated_sys_vid extends model
 	{
 		return array('vid' => array('Field' => 'vid','Type' => 'varchar(32)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'mod_name' => array('Field' => 'mod_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => 'MUL','Default' => NULL,'Extra' => '',),);
 	}
+
+	public function table_name()
+	{
+		return 'sys_vid';
+	}
+
 
 	public function vid($d=null)
 	{

@@ -1,7 +1,6 @@
 <?
 class generated_mod_usradmin_grp extends model
 {
-	var $_table = 'mod_usradmin_grp';
 
 	protected function _keys()
 	{
@@ -12,6 +11,12 @@ class generated_mod_usradmin_grp extends model
 	{
 		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'name' => array('Field' => 'name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'lang' => array('Field' => 'lang','Type' => 'int(2)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'tinyint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
+
+	public function table_name()
+	{
+		return 'mod_usradmin_grp';
+	}
+
 
 	public function id($d=null)
 	{

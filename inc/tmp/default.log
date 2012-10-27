@@ -8042,3 +8042,39 @@ Sat, 27 Oct 2012 14:24:18 +0200
 '
 Sat, 27 Oct 2012 14:24:18 +0200
 'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 14:35:03 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:35:04 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:36:17 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:36:22 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:37:23 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:37:29 +0200
+'Array
+(
+    [permanent] => 1
+)
+'

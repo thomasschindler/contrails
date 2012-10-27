@@ -27,15 +27,15 @@ class HOST_CONF
 	}
 	function project_name()
 	{
-		return 'contrails';
+		return 'unfucktheplanet';
 	}
 	function baseurl()
 	{
-		return 'http://contrails.local';
+		return 'http://unfucktheplanet.local';
 	}
 	function default_layout()
 	{
-		return 'contrails';
+		return 'unfucktheplanet';
 	}
 	function default_pages()
 	{
