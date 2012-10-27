@@ -4,8 +4,12 @@ class MF{
 
 	private $_instances = array();
 
-	public function store(&$object){
-		$this->_instances[] = $object;
+	public function singleton() {
+		static $instance;
+			
+		if (!is_object($instance)) { $instance = new MF(); }
+			
+		return $instance;
 	}
 
 	public function obtain($table, $key){
@@ -23,8 +27,11 @@ class MF{
 			return null;
 		}
 
-		$this->_instances[$table][$key] = new $table($obj->r());
-		
+		$this->_instances[$table][$key] = new $table();
+		if(!$this->_instances[$table][$key]->load($obj->r())){
+			return null;
+		}
+
 		return &$this->_instances[$table][$key];
 	}
 

@@ -1,6 +1,8 @@
 <?
 
 abstract class model{
+	protected $_fields;
+
 	private $_error_messages = array();
 
 	private $_state = array(
@@ -11,9 +13,21 @@ abstract class model{
 				mstack::Done 	=> null
 			);
 
-	private function __construct(){
-		MF::store(&$this);		
-	} 
+	public function __construct(){} 
+
+	public function load($data){
+		if($this->loaded()){
+			log::err("Attempting to load an already existing instance.");
+			return null;
+		}
+
+		$this->_fields = $data;
+		if($this->push_load($this->_fields) !== return::success){
+			return null;	
+		}
+
+		return true;
+	}
 
 	public static function new($class, $data){
 		if(!class_exists($class)){
@@ -214,6 +228,41 @@ abstract class model{
 		}
 
 		return $data;
+	}
+
+	protected function _valid($value, $type, $size, $nullable = false){
+		switch ($type) {
+			case 'int': 
+				if(is_int($value) === false || ctype_digit($value) === false){
+					log::warn("Value '$value' is not an Integer.");
+					return null;
+				}
+				//Just to make sure we also get the correct value if it happened to be a string containing a number
+				$value = intval($value);
+
+				if($value > mysql_int_range::Min && $value > mysql_int_range::Max){
+					log::warn("Value '$value' is out of range for a MySQL Integer.");
+					return null;
+				}
+				break;
+			case 'varchar'; break;
+				if(is_string($value) === false){
+					log::warn("Sent in value does not translate to a valid string.");
+					return null;
+				}
+				$len = strlen($value);
+				if($len > $size){
+					log::warn("The string '$value' is too long ($len) for the maximum size allowed ($size). The string will be truncated to $size characters.");
+				}
+				break;
+			case 'float': 
+				/* @todo */
+				break;
+			default:
+				break;
+		}
+
+		return true;
 	}
 
 }
