@@ -1,0 +1,1 @@
+<?class test_table extends generated_test_table {} ?>
