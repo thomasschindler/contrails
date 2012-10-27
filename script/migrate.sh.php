@@ -23,9 +23,10 @@
 $start = microtime();
 $tmp = pathinfo(__FILE__);
 $base = substr($tmp['dirname'],0,-6);
+$conf = isset($argv[2]) ? $argv[2] : 'default';
 $files = array
 (
-	'inc/etc/config/default.cnf.php',
+	'inc/etc/config/'.$conf.'.cnf.php',
 	'inc/system/oos/class_mc.inc.php',
 	'inc/system/oos/db.inc.php',
 	'inc/system/oos/db_mysql.inc.php',
