@@ -33,9 +33,9 @@ h		help
 	die;
 }
 // start in the right directory
-chdir(substr(dirname(__FILE__),0,-7));
+chdir(substr(dirname(__FILE__),0,-6));
 // get and init the system
-$config = substr(dirname(__FILE__),0,-7).'/etc/config/'.(isset($a['c'])?$a['c']:'default').'.cnf';
+$config = substr(dirname(__FILE__),0,-6).'/etc/config/'.(isset($a['c'])?$a['c']:'default').'.cnf.php';
 if(!is_file($config))
 {
 	die("no config found\n");
@@ -68,7 +68,7 @@ include_once($config);
 $_SERVER['HTTP_HOST'] = stripslashes(substr(HOST_CONF::baseurl(),7));
 $_POST['SESSION'] = isset($a['s'])?$a['s']:php_uname('n')."_".@date("Ymd");
 $GET['SESSION'] = isset($a['s'])?$a['s']:php_uname('n')."_".@date("Ymd");
-include_once(substr(dirname(__FILE__),0,-7).'/oos.sys');
+include_once(substr(dirname(__FILE__),0,-6).'/bootstrap.php');
 $OPC = new OPC();          
 $MC  = &MC::singleton();
 $SESS = &SESS::singleton();
