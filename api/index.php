@@ -198,6 +198,7 @@ else
 $OPC = &OPC::singleton();
 $OPC->set_pid($data['pid']);
 $MC  = &MC::singleton();
+$MF  = &MF::singleton();
 $SESS = &SESS::singleton();
 $SESS->start();
 $CLIENT = &CLIENT::singleton(true);
@@ -243,6 +244,8 @@ unset($_REQUEST);
 $response = $MC->call($data['mod'],$data['event'],$p);
 
 $type = isset($response['type'])?$response['type']:$data['type'];
+
+$MF->flush();
 
 response_send($response['status'],$response['data'],$type,$cache);
 // functions

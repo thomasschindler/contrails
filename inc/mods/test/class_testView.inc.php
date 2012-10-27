@@ -20,23 +20,22 @@ class test_view extends modView
 	function test()
 	{
 
-		$m = MF::singleton();
-		$b = $m->obtain('sys_burc','p108071938_348');
-		if(!$b->pid(500)){
-			MC::log("Failed to update");
-		}
-
-		$c = $m->obtain('test_table', null, array('field2' => 23, 'field1' => 'Something or another'));
+		
+		$b = $this->MF->obtain('sys_burc','p108071938_348');
 
 		$b->permanent(1);
 
-//		$b->save();
+		//$c = $m->obtain('test_table', null, array('field2' => 23, 'field1' => 'Something or another'));
+
+		///$b->permanent(1);
+
+		//$b->save();
 
 		//$b = new sys_burc();
 
 		//$b->load('p108071938_348');
 
-		MC::debug($c);
+		MC::debug($b);
 
 		return;
 

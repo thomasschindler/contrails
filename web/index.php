@@ -38,6 +38,10 @@
 	*/
 	$SESS = &SESS::singleton();
 	$SESS->start();
+	/*
+	*	instantiate the model factory
+	*/
+	$MF  = &MF::singleton();
 	/**
 	* define the action
 	*/
@@ -68,6 +72,10 @@
 	*	finalize cache
 	*/
 	$CACHE->write();
+	/**
+	*	finalize the models (actually write all changes to the db)
+	*/
+	$MF->flush();
 	/**
 	*	write the log entry
 	*/

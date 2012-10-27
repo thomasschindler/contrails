@@ -7916,3 +7916,45 @@ array (
   'event' => 'pa_ar',
   'mod' => 'page',
 )
+Sat, 27 Oct 2012 13:19:41 +0200
+'Array
+(
+    [pid] => 500
+)
+'
+Sat, 27 Oct 2012 13:19:41 +0200
+'Table: test_table Data: Array
+(
+    [field2] => 23
+    [field1] => Something or another
+)
+'
+Sat, 27 Oct 2012 13:19:42 +0200
+'Failed to insert the record into the Database  '
+Sat, 27 Oct 2012 13:19:42 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 13:19:43 +0200
+'Array
+(
+    [pid] => 500
+)
+'
+Sat, 27 Oct 2012 13:19:43 +0200
+'Table: test_table Data: Array
+(
+    [field2] => 23
+    [field1] => Something or another
+)
+'
+Sat, 27 Oct 2012 13:19:43 +0200
+'Failed to insert the record into the Database  '
+Sat, 27 Oct 2012 13:19:43 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
