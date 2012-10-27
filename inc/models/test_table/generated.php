@@ -40,6 +40,7 @@ class generated_test_table extends model
 			$this->_fields['field1'] = $d;
 			return true;
 		}
+
 		return $this->_fields['field1'];
 	}
 
@@ -50,7 +51,7 @@ class generated_test_table extends model
 			if(!$this->_valid($d,'int',11))
 			{
 				return false;
-			}
+			}	
 			$this->push_update(array('field2'=>$d));
 			$this->_fields['field2'] = $d;
 			return true;
