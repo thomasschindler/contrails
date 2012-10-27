@@ -35,7 +35,6 @@ abstract class model{
 		return true;
 	}
 
-
 	public static function create($class, $data){
 		if(!class_exists($class)){
 			log::err("Attempted to load an unexisting class in the new method '$class'");

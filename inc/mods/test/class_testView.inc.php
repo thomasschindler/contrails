@@ -23,6 +23,10 @@ class test_view extends modView
 		$m = MF::singleton();
 		$b = $m->obtain('sys_burc','p108071938_348');
 
+		$b->permanent(1);
+
+		$b->save();
+
 		//$b = new sys_burc();
 
 		//$b->load('p108071938_348');
