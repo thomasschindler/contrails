@@ -15,6 +15,11 @@ abstract class model{
 
 	public function __construct(){} 
 
+	public function primary_key(){
+		$keys = $this->_keys();
+		return $keys['0']['fields']['0'];
+	}
+
 	public function load($data){
 		if($this->loaded()){
 			log::err("Attempting to load an already existing instance.");
@@ -30,10 +35,6 @@ abstract class model{
 		return true;
 	}
 
-	private function loaded()
-	{
-		return true;
-	}
 
 	public static function create($class, $data){
 		if(!class_exists($class)){
@@ -70,7 +71,7 @@ abstract class model{
 		$rows = $CRUD->load_range($table_name, array('id'), $data);
 		$return = array();
 
-		if($rows->nr() <= 0){
+		if(!$rows || $rows->nr() <= 0){
 			return null;
 		}
 
@@ -143,6 +144,8 @@ abstract class model{
 		return $this->updated() || $this->deleted() || !$this->exists();
 	}
 	
+	private function loaded(){ return false; }
+
 	public function exists(){
 		return !is_null($this->_state[mstack::Load]);
 	}

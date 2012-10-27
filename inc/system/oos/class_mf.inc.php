@@ -13,6 +13,11 @@ class MF{
 	}
 
 	public function obtain($table, $key){
+		if(!class_exists($table)){
+			log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
+			return null;
+		}
+
 		if(!isset($this->_instances[$table])){
 			$this->_instances[$table] = array();
 		}
@@ -21,9 +26,13 @@ class MF{
 			return $this->_instances[$table][$key];
 		}
 
-		$obj = $this->CRUD()->load($table, 'id', $key);
+		$mdl = new $table();
+		$key_columns = $mdl->primary_key();
 
-		if($obj->nr() <= 0){
+
+		$obj = $this->CRUD()->load($table, $key_columns, $key);
+
+		if(!$obj || $obj->nr() <= 0){
 			return null;
 		}
 
