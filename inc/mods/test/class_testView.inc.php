@@ -20,6 +20,17 @@ class test_view extends modView
 	function test()
 	{
 
+		$u = &$this->MOF->obtain('uftp_fucks');
+		
+		$u->title('title');
+		$u->description('description');
+		$u->image('image');
+		$u->user_id(1);
+		$u->location_id(1);
+		$u->created_at(time());
+		$u->updated_at(time());
+
+		return;
 		
 		$b = &$this->MF->obtain('sys_burc','p108071938_348');
 
@@ -39,7 +50,7 @@ class test_view extends modView
 
 		return;
 
-<<<<<<< HEAD
+
 /*
 		$this->facebook = new Facebook(array(
 		  'appId'  => '492651730746756',
@@ -83,8 +94,7 @@ class test_view extends modView
 		
 		/*
 
-=======
->>>>>>> master
+
 		if($this->access('test'))
 		{
 			$this->set_var('link',$this->lnk(array('event' => 'test')));
