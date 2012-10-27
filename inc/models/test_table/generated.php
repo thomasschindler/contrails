@@ -1,7 +1,6 @@
 <?
 class generated_test_table extends model
 {
-	var $_table = 'test_table';
 
 	protected function _keys()
 	{
@@ -12,6 +11,12 @@ class generated_test_table extends model
 	{
 		return array('id' => array('Field' => 'id','Type' => 'int(11)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => 'auto_increment',),'field1' => array('Field' => 'field1','Type' => 'varchar(45)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'field2' => array('Field' => 'field2','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
+
+	public function table_name()
+	{
+		return 'test_table';
+	}
+
 
 	public function id($d=null)
 	{

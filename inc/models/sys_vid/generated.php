@@ -1,7 +1,6 @@
 <?
 class generated_sys_vid extends model
 {
-	var $_table = 'sys_vid';
 
 	protected function _keys()
 	{
@@ -13,11 +12,13 @@ class generated_sys_vid extends model
 		return array('vid' => array('Field' => 'vid','Type' => 'varchar(32)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'mod_name' => array('Field' => 'mod_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => 'MUL','Default' => NULL,'Extra' => '',),);
 	}
 
-<<<<<<< HEAD
-	function vid($d=null)
-=======
+	public function table_name()
+	{
+		return 'sys_vid';
+	}
+
+
 	public function vid($d=null)
->>>>>>> master
 	{
 		if($d !== null)
 		{
@@ -32,11 +33,7 @@ class generated_sys_vid extends model
 		return $this->_fields['vid'];
 	}
 
-<<<<<<< HEAD
-	function mod_name($d=null)
-=======
-	public function pid($d=null)
->>>>>>> master
+	public function mod_name($d=null)
 	{
 		if($d !== null)
 		{
@@ -44,22 +41,14 @@ class generated_sys_vid extends model
 			{
 				return false;
 			}
-<<<<<<< HEAD
+			$this->push_update(array('mod_name'=>$d));
 			$this->_fields['mod_name'] = $d;
-=======
-			$this->push_update(array('pid'=>$d));
-			$this->_fields['pid'] = $d;
->>>>>>> master
 			return true;
 		}
 		return $this->_fields['mod_name'];
 	}
 
-<<<<<<< HEAD
-	function pid($d=null)
-=======
-	public function mod_name($d=null)
->>>>>>> master
+	public function pid($d=null)
 	{
 		if($d !== null)
 		{
@@ -67,12 +56,8 @@ class generated_sys_vid extends model
 			{
 				return false;
 			}
-<<<<<<< HEAD
+			$this->push_update(array('pid'=>$d));
 			$this->_fields['pid'] = $d;
-=======
-			$this->push_update(array('mod_name'=>$d));
-			$this->_fields['mod_name'] = $d;
->>>>>>> master
 			return true;
 		}
 		return $this->_fields['pid'];

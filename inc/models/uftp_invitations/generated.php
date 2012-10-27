@@ -1,8 +1,6 @@
 <?
 class generated_uftp_invitations extends model
 {
-	var $_fields = array();
-	var $_table = 'uftp_invitations';
 
 	protected function _keys()
 	{
@@ -14,7 +12,13 @@ class generated_uftp_invitations extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => 'auto_increment',),'invite_token' => array('Field' => 'invite_token','Type' => 'varchar(32)','Null' => 'YES','Key' => 'MUL','Default' => NULL,'Extra' => '',),'email' => array('Field' => 'email','Type' => 'varchar(255)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'created_at' => array('Field' => 'created_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'updated_at' => array('Field' => 'updated_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function table_name()
+	{
+		return 'uftp_invitations';
+	}
+
+
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +26,14 @@ class generated_uftp_invitations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function invite_token($d=null)
+	public function invite_token($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +41,14 @@ class generated_uftp_invitations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('invite_token'=>$d));
 			$this->_fields['invite_token'] = $d;
 			return true;
 		}
 		return $this->_fields['invite_token'];
 	}
 
-	function email($d=null)
+	public function email($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +56,14 @@ class generated_uftp_invitations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('email'=>$d));
 			$this->_fields['email'] = $d;
 			return true;
 		}
 		return $this->_fields['email'];
 	}
 
-	function created_at($d=null)
+	public function created_at($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +71,14 @@ class generated_uftp_invitations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('created_at'=>$d));
 			$this->_fields['created_at'] = $d;
 			return true;
 		}
 		return $this->_fields['created_at'];
 	}
 
-	function updated_at($d=null)
+	public function updated_at($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,6 +86,7 @@ class generated_uftp_invitations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('updated_at'=>$d));
 			$this->_fields['updated_at'] = $d;
 			return true;
 		}

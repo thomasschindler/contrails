@@ -3,8 +3,6 @@
 abstract class model{
 	protected $_fields;
 
-	private $_error_messages = array();
-
 	private $_state = array(
 				mstack::Delete 	=> null,
 				mstack::Load 	=> null,
@@ -34,30 +32,6 @@ abstract class model{
 
 		return true;
 	}
-
-	public static function create($class, $data){
-		if(!class_exists($class)){
-			log::err("Attempted to load an unexisting class in the new method '$class'");
-			return null;
-		}
-
-		$table_name = $class::table_name();
-		$instance = new $class();
-
-		$data = $instance->validate_data($data, true);
-
-		if(empty($data)){
-			log::err("Failed to validate the data sent in.");
-			return null;
-		}
-
-		if($instance->push_create($data) !== exit_status::success){
-			log::err("Failed to push the creation state of the object to the change stack.");
-			return null;
-		}
-
-		return $instance;
-	}	
 
 	public static function fetch($class, $data){
 		if(!class_exists($class)){
@@ -119,7 +93,18 @@ abstract class model{
 					'action' 	=> $action, 
 					'data' 		=> $data
 				);
-	} 
+	}
+
+	public function clear_status(){
+		$this->_state = array(
+				mstack::Delete 	=> null,
+				mstack::Load 	=> $this->_state[mstack::Load],
+				mstack::Update 	=> null,
+				mstack::Current => null,
+				mstack::Done 	=> null
+			);
+	}
+
 
 	/**
 	 *	Does this object have an update pending?
@@ -130,8 +115,6 @@ abstract class model{
 	public function updated(){
 		return !is_null($this->_state[mstack::Update]);
 	}
-
-
 
 	/**
 	 *	Has this object been changed in any way? (created, deleted or updated)
@@ -241,7 +224,7 @@ abstract class model{
 	protected function _valid($value, $type, $size, $nullable = false){
 		switch ($type) {
 			case 'int': 
-				if(is_int($value) === false || ctype_digit($value) === false){
+				if(is_int($value) === false && ctype_digit($value) === false){
 					log::warn("Value '$value' is not an Integer.");
 					return null;
 				}

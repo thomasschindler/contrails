@@ -1,8 +1,6 @@
 <?
 class generated_uftp_locations extends model
 {
-	var $_fields = array();
-	var $_table = 'uftp_locations';
 
 	protected function _keys()
 	{
@@ -14,7 +12,13 @@ class generated_uftp_locations extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => 'auto_increment',),'name' => array('Field' => 'name','Type' => 'varchar(255)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'lat' => array('Field' => 'lat','Type' => 'float','Null' => 'YES','Key' => 'MUL','Default' => NULL,'Extra' => '',),'lon' => array('Field' => 'lon','Type' => 'float','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'created_at' => array('Field' => 'created_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'updated_at' => array('Field' => 'updated_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function table_name()
+	{
+		return 'uftp_locations';
+	}
+
+
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +26,14 @@ class generated_uftp_locations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function name($d=null)
+	public function name($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +41,14 @@ class generated_uftp_locations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('name'=>$d));
 			$this->_fields['name'] = $d;
 			return true;
 		}
 		return $this->_fields['name'];
 	}
 
-	function lat($d=null)
+	public function lat($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +56,14 @@ class generated_uftp_locations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('lat'=>$d));
 			$this->_fields['lat'] = $d;
 			return true;
 		}
 		return $this->_fields['lat'];
 	}
 
-	function lon($d=null)
+	public function lon($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +71,14 @@ class generated_uftp_locations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('lon'=>$d));
 			$this->_fields['lon'] = $d;
 			return true;
 		}
 		return $this->_fields['lon'];
 	}
 
-	function created_at($d=null)
+	public function created_at($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,13 +86,14 @@ class generated_uftp_locations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('created_at'=>$d));
 			$this->_fields['created_at'] = $d;
 			return true;
 		}
 		return $this->_fields['created_at'];
 	}
 
-	function updated_at($d=null)
+	public function updated_at($d=null)
 	{
 		if($d !== null)
 		{
@@ -92,6 +101,7 @@ class generated_uftp_locations extends model
 			{
 				return false;
 			}
+			$this->push_update(array('updated_at'=>$d));
 			$this->_fields['updated_at'] = $d;
 			return true;
 		}

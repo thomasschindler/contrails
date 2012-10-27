@@ -83,7 +83,7 @@ function models()
 			$s = "<?\nclass generated_".$table." extends model\n{\n";
 			// add some vars
 			//$s .= "\tvar \$_fields = array();\n";
-			$s .= "\tvar \$_table = '".$table."';\n";
+			//$s .= "\tvar \$_table = '".$table."';\n";
 			// add relationship description
 			if(isset($config['relations']))
 			{
@@ -100,6 +100,12 @@ function models()
 	{
 		return array(".array2string($config['fields'],2,true).");
 	}
+
+	public function table_name()
+	{
+		return '".$table."';
+	}
+
 ";
 			// create the getter/setter method(s) (include some validation)
 			foreach($config['fields'] as $field)

@@ -1,7 +1,6 @@
 <?
 class generated_sys_module extends model
 {
-	var $_table = 'sys_module';
 
 	protected function _keys()
 	{
@@ -13,11 +12,13 @@ class generated_sys_module extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'modul_name' => array('Field' => 'modul_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'label' => array('Field' => 'label','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'smallint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'virtual' => array('Field' => 'virtual','Type' => 'tinyint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-<<<<<<< HEAD
-	function id($d=null)
-=======
+	public function table_name()
+	{
+		return 'sys_module';
+	}
+
+
 	public function id($d=null)
->>>>>>> master
 	{
 		if($d !== null)
 		{

@@ -1,7 +1,6 @@
 <?
 class generated_mod_page_tpl extends model
 {
-	var $_table = 'mod_page_tpl';
 
 	protected function _keys()
 	{
@@ -13,11 +12,13 @@ class generated_mod_page_tpl extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'tpl_name' => array('Field' => 'tpl_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'label' => array('Field' => 'label','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'smallint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-<<<<<<< HEAD
-	function id($d=null)
-=======
+	public function table_name()
+	{
+		return 'mod_page_tpl';
+	}
+
+
 	public function id($d=null)
->>>>>>> master
 	{
 		if($d !== null)
 		{

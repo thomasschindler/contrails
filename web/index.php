@@ -41,7 +41,7 @@
 	/*
 	*	instantiate the model factory
 	*/
-	$MF  = &MF::singleton();
+	$MOF  = &MF::singleton();
 	/**
 	* define the action
 	*/
@@ -75,7 +75,7 @@
 	/**
 	*	finalize the models (actually write all changes to the db)
 	*/
-	$MF->flush();
+	$MOF->flush();
 	/**
 	*	write the log entry
 	*/
