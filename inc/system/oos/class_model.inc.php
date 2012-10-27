@@ -22,7 +22,7 @@ abstract class model{
 		}
 
 		$this->_fields = $data;
-		if($this->push_load($this->_fields) !== return::success){
+		if($this->push_load($this->_fields) !== exit_status::success)){
 			return null;	
 		}
 
@@ -45,7 +45,7 @@ abstract class model{
 			return null;
 		}
 
-		if($instance->push_create($data) !== return::success){
+		if($instance->push_create($data) !== exit_status::success){
 			log::err("Failed to push the creation state of the object to the change stack.");
 			return null;
 		}
@@ -69,7 +69,7 @@ abstract class model{
 		}
 
 		while($rows->next()){
-			$instance = MF::obtain($table_name, $rows->f('id'));
+			$instance = $this->MF()->obtain($table_name, $rows->f('id'));
 			$return[] = $instance;
 		}
 
@@ -151,46 +151,46 @@ abstract class model{
 	protected function push_load($data){
 		if(!is_null($this->_state[mstack::Load])){
 			log::warn("Attempting to reload an already loaded object. This shouldn't happen.");
-			return return::no_change;
+			return exit_status::no_change;
 		}
 
 		$this->_state[mstack::Load] = $data;
-		return return::success;	
+		return exit_status::success;	
 	}
 
 	protected function push_update($data){
 		if($this->updated() === false){
 			$this->_state[mstack::Update] = $data;
-			return return::success;		
+			return exit_status::success;		
 		}
 
 		if($this->deleted()){
 			log::err("Cannot update a model that is marked for deletion.");
-			return return::error;
+			return exit_status::error;
 		}
 
 		foreach($data as $key => $value){
 			$this->_state[mstack::Update][$key] = $value;
 		}
 
-		return return::success;
+		return exit_status::success;
 	}
 
 	protected function push_create($data){
 		if($this->exists()){
 			log::err("Cannot reinsert an object on the database. If you need to clone a row, use the clone method instead.");
-			return return::error;
+			return exit_status::error;
 		}
 
 		$this->_state[mstack::Update] = $data;
 
-		return return::success;
+		return exit_status::success;
 	} 
 	
 	protected function push_delete(){
 		if($this->deleted()){
 			log::warn("Object has already been deleted.");
-			return return::no_change;
+			return exit_status::no_change;
 		}
 
 		if($this->changed() || $this->exists() === false){
@@ -199,7 +199,7 @@ abstract class model{
 
 		$this->_state[mstack::Delete] = true;
 
-		return return::success;
+		return exit_status::success;
 	}
 
 	private function validate_data($data, $complete_unexisting = false){
@@ -263,6 +263,10 @@ abstract class model{
 		}
 
 		return true;
+	}
+
+	protected function MF(){
+		return MF::singleton();
 	}
 
 }
