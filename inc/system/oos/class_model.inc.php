@@ -3,8 +3,6 @@
 abstract class model{
 	protected $_fields;
 
-	private $_error_messages = array();
-
 	private $_state = array(
 				mstack::Delete 	=> null,
 				mstack::Load 	=> null,
@@ -34,30 +32,6 @@ abstract class model{
 
 		return true;
 	}
-
-	public static function create($class, $data){
-		if(!class_exists($class)){
-			log::err("Attempted to load an unexisting class in the new method '$class'");
-			return null;
-		}
-
-		$table_name = $class::table_name();
-		$instance = new $class();
-
-		$data = $instance->validate_data($data, true);
-
-		if(empty($data)){
-			log::err("Failed to validate the data sent in.");
-			return null;
-		}
-
-		if($instance->push_create($data) !== exit_status::success){
-			log::err("Failed to push the creation state of the object to the change stack.");
-			return null;
-		}
-
-		return $instance;
-	}	
 
 	public static function fetch($class, $data){
 		if(!class_exists($class)){

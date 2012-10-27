@@ -34,14 +34,18 @@ class MF{
 	public function &register($instance){
 		$status = $instance->pull();
 
-		if($status['action'] !== factory_actions::Create){
+		MC::log("Status: " . print_r($status, true) . " Instance: " . print_r($instance, true));
+
+		/*if($status['action'] !== factory_actions::Create){
 			log::err("Instance already exists or is not in the created status.");
 			return false;
-		}
+		}*/
 		
 		$table = $instance->table_name();
+		MC::log("Table: " . $table);
 
 		$key = $this->create_record($table, $status['data']);
+		MC::log("Key: " . $key);
 
 		if(is_null($key)){
 			log::err("Insertion failed");
@@ -104,12 +108,6 @@ class MF{
 		}
 
 		return $key;						
-	}
-
-
-
-	private function store_states(){
-
 	}
 
 	private function do_delete($table, $keys){
