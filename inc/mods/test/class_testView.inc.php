@@ -19,13 +19,11 @@ class test_view extends modView
 	*/
 	function test()
 	{
-
 		// pull data 
 		$b1 = &$this->MOF->obtain('sys_burc','p108071938_348');
 		// modify data
 		$b1->permanent(1);
-
-		
+	
 		// create a new object
 		$b2 = &$this->MOF->obtain('sys_burc',array
 			(

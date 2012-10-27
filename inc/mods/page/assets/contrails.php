@@ -13,6 +13,8 @@
     <script src="/template/contrails/colorbox/jquery.colorbox-min.js"></script>
     <script src="/template/contrails/contrails/js/contrails.js"></script>
 
+    <link rel="shortcut icon" href="/template/contrails/contrails/img/favicon.ico" />
+
   </head>
   <body>
     <div id="logo">
