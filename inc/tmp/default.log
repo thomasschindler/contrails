@@ -9832,3 +9832,87 @@ Sat, 27 Oct 2012 15:40:46 +0200
 'IN INDEX'
 Sat, 27 Oct 2012 15:40:59 +0200
 'IN INDEX'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [title] => title
+)
+'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [description] => description
+)
+'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [image] => image
+)
+'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [user_id] => 1
+)
+'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [location_id] => 1
+)
+'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [created_at] => 1351346654
+)
+'
+Sat, 27 Oct 2012 16:04:14 +0200
+'Array
+(
+    [updated_at] => 1351346654
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [title] => title
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [description] => description
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [image] => image
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [user_id] => 1
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [location_id] => 1
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [created_at] => 1351346689
+)
+'
+Sat, 27 Oct 2012 16:04:49 +0200
+'Array
+(
+    [updated_at] => 1351346689
+)
+'
