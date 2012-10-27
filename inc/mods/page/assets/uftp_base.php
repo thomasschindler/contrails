@@ -15,6 +15,8 @@
         <button id="create_fuck" class="btn btn-large btn-primary" type="button">Pedro, Help us Unfuck the Planet</button>
       </div>
     </div>
+    
+    <?$OPC->call('test')?>
 
     <br />
     <div id="body-wrap">
