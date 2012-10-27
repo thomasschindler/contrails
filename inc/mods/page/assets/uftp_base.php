@@ -4,6 +4,7 @@
     <title>Unfuck the Planet</title>
     <link href="/template/unfucktheplanet/bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <link href="/template/unfucktheplanet/resource/css/base.css" rel="stylesheet">
+    <link rel="shortcut icon" href="/template/unfucktheplanet/resource/img/favicon.ico" />
   </head>
   <body>
     <div id="server-error">Oh wow, something seems to have gone wrong. Unfuck the server!</div>

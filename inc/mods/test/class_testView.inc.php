@@ -30,6 +30,8 @@ class test_view extends modView
 		$u->created_at(time());
 		$u->updated_at(time());
 
+		$this->MOF->register($u);
+
 		return;
 		
 		$b = &$this->MF->obtain('sys_burc','p108071938_348');
