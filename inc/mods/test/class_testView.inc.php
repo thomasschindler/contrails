@@ -21,7 +21,7 @@ class test_view extends modView
 	{
 
 		
-		$b = $this->MF->obtain('sys_burc','p108071938_348');
+		$b = &$this->MF->obtain('sys_burc','p108071938_348');
 
 		$b->permanent(1);
 
