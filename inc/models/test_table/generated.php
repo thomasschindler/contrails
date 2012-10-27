@@ -1,7 +1,6 @@
 <?
 class generated_test_table extends model
 {
-	var $_fields = array();
 	var $_table = 'test_table';
 
 	protected function _keys()
@@ -14,7 +13,7 @@ class generated_test_table extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => 'auto_increment',),'field1' => array('Field' => 'field1','Type' => 'varchar(45)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'field2' => array('Field' => 'field2','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +21,14 @@ class generated_test_table extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function field1($d=null)
+	public function field1($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +36,14 @@ class generated_test_table extends model
 			{
 				return false;
 			}
+			$this->push_update(array('field1'=>$d));
 			$this->_fields['field1'] = $d;
 			return true;
 		}
 		return $this->_fields['field1'];
 	}
 
-	function field2($d=null)
+	public function field2($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,6 +51,7 @@ class generated_test_table extends model
 			{
 				return false;
 			}
+			$this->push_update(array('field2'=>$d));
 			$this->_fields['field2'] = $d;
 			return true;
 		}

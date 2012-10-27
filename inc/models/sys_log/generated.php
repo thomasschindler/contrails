@@ -1,7 +1,6 @@
 <?
 class generated_sys_log extends model
 {
-	var $_fields = array();
 	var $_table = 'sys_log';
 
 	protected function _keys()
@@ -14,7 +13,7 @@ class generated_sys_log extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'time' => array('Field' => 'time','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'project' => array('Field' => 'project','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'url' => array('Field' => 'url','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'mod' => array('Field' => 'mod','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'event' => array('Field' => 'event','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'files' => array('Field' => 'files','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'post' => array('Field' => 'post','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'get' => array('Field' => 'get','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'ip' => array('Field' => 'ip','Type' => 'varchar(30)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'session' => array('Field' => 'session','Type' => 'varchar(40)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'browser' => array('Field' => 'browser','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'uid' => array('Field' => 'uid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'name' => array('Field' => 'name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'referer' => array('Field' => 'referer','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +21,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function time($d=null)
+	public function time($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +36,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('time'=>$d));
 			$this->_fields['time'] = $d;
 			return true;
 		}
 		return $this->_fields['time'];
 	}
 
-	function project($d=null)
+	public function project($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +51,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('project'=>$d));
 			$this->_fields['project'] = $d;
 			return true;
 		}
 		return $this->_fields['project'];
 	}
 
-	function url($d=null)
+	public function url($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +66,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('url'=>$d));
 			$this->_fields['url'] = $d;
 			return true;
 		}
 		return $this->_fields['url'];
 	}
 
-	function pid($d=null)
+	public function pid($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,13 +81,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('pid'=>$d));
 			$this->_fields['pid'] = $d;
 			return true;
 		}
 		return $this->_fields['pid'];
 	}
 
-	function mod($d=null)
+	public function mod($d=null)
 	{
 		if($d !== null)
 		{
@@ -92,13 +96,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('mod'=>$d));
 			$this->_fields['mod'] = $d;
 			return true;
 		}
 		return $this->_fields['mod'];
 	}
 
-	function event($d=null)
+	public function event($d=null)
 	{
 		if($d !== null)
 		{
@@ -106,13 +111,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('event'=>$d));
 			$this->_fields['event'] = $d;
 			return true;
 		}
 		return $this->_fields['event'];
 	}
 
-	function files($d=null)
+	public function files($d=null)
 	{
 		if($d !== null)
 		{
@@ -120,13 +126,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('files'=>$d));
 			$this->_fields['files'] = $d;
 			return true;
 		}
 		return $this->_fields['files'];
 	}
 
-	function post($d=null)
+	public function post($d=null)
 	{
 		if($d !== null)
 		{
@@ -134,13 +141,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('post'=>$d));
 			$this->_fields['post'] = $d;
 			return true;
 		}
 		return $this->_fields['post'];
 	}
 
-	function get($d=null)
+	public function get($d=null)
 	{
 		if($d !== null)
 		{
@@ -148,13 +156,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('get'=>$d));
 			$this->_fields['get'] = $d;
 			return true;
 		}
 		return $this->_fields['get'];
 	}
 
-	function ip($d=null)
+	public function ip($d=null)
 	{
 		if($d !== null)
 		{
@@ -162,13 +171,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('ip'=>$d));
 			$this->_fields['ip'] = $d;
 			return true;
 		}
 		return $this->_fields['ip'];
 	}
 
-	function session($d=null)
+	public function session($d=null)
 	{
 		if($d !== null)
 		{
@@ -176,13 +186,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('session'=>$d));
 			$this->_fields['session'] = $d;
 			return true;
 		}
 		return $this->_fields['session'];
 	}
 
-	function browser($d=null)
+	public function browser($d=null)
 	{
 		if($d !== null)
 		{
@@ -190,13 +201,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('browser'=>$d));
 			$this->_fields['browser'] = $d;
 			return true;
 		}
 		return $this->_fields['browser'];
 	}
 
-	function uid($d=null)
+	public function uid($d=null)
 	{
 		if($d !== null)
 		{
@@ -204,13 +216,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('uid'=>$d));
 			$this->_fields['uid'] = $d;
 			return true;
 		}
 		return $this->_fields['uid'];
 	}
 
-	function name($d=null)
+	public function name($d=null)
 	{
 		if($d !== null)
 		{
@@ -218,13 +231,14 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('name'=>$d));
 			$this->_fields['name'] = $d;
 			return true;
 		}
 		return $this->_fields['name'];
 	}
 
-	function referer($d=null)
+	public function referer($d=null)
 	{
 		if($d !== null)
 		{
@@ -232,6 +246,7 @@ class generated_sys_log extends model
 			{
 				return false;
 			}
+			$this->push_update(array('referer'=>$d));
 			$this->_fields['referer'] = $d;
 			return true;
 		}

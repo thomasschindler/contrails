@@ -25,7 +25,7 @@ class test_view extends modView
 
 		$b->permanent(1);
 
-		$b->save();
+//		$b->save();
 
 		//$b = new sys_burc();
 

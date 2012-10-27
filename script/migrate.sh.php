@@ -82,7 +82,7 @@ function models()
 			include($base."script/resources/migrate/".$file);
 			$s = "<?\nclass generated_".$table." extends model\n{\n";
 			// add some vars
-			$s .= "\tvar \$_fields = array();\n";
+			//$s .= "\tvar \$_fields = array();\n";
 			$s .= "\tvar \$_table = '".$table."';\n";
 			// add relationship description
 			if(isset($config['relations']))
@@ -113,7 +113,7 @@ function models()
 					$length = (int)$tmp[0];
 				}
 				$s .= "
-	function ".$field['Field']."(\$d=null)
+	public function ".$field['Field']."(\$d=null)
 	{
 		if(\$d !== null)
 		{
@@ -121,6 +121,7 @@ function models()
 			{
 				return false;
 			}
+			\$this->push_update(array('".$field['Field']."'=>\$d));
 			\$this->_fields['".$field['Field']."'] = \$d;
 			return true;
 		}
@@ -326,7 +327,7 @@ function array2string($a,$l=1,$inline=false)
 			}
 			elseif(is_string($v))
 			{
-				$s .= "'".$v."',\n";	
+				$s .= "'".preg_replace("/'/","\'",$v)."',\n";	
 			}
 			elseif(is_numeric($v))
 			{

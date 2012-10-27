@@ -1,7 +1,6 @@
 <?
 class generated_sys_vid extends model
 {
-	var $_fields = array();
 	var $_table = 'sys_vid';
 	var $_relations = array
 	(
@@ -26,7 +25,7 @@ class generated_sys_vid extends model
 		return array('vid' => array('Field' => 'vid','Type' => 'varchar(32)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => '','Extra' => '',),'mod_name' => array('Field' => 'mod_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function vid($d=null)
+	public function vid($d=null)
 	{
 		if($d !== null)
 		{
@@ -34,13 +33,14 @@ class generated_sys_vid extends model
 			{
 				return false;
 			}
+			$this->push_update(array('vid'=>$d));
 			$this->_fields['vid'] = $d;
 			return true;
 		}
 		return $this->_fields['vid'];
 	}
 
-	function pid($d=null)
+	public function pid($d=null)
 	{
 		if($d !== null)
 		{
@@ -48,13 +48,14 @@ class generated_sys_vid extends model
 			{
 				return false;
 			}
+			$this->push_update(array('pid'=>$d));
 			$this->_fields['pid'] = $d;
 			return true;
 		}
 		return $this->_fields['pid'];
 	}
 
-	function mod_name($d=null)
+	public function mod_name($d=null)
 	{
 		if($d !== null)
 		{
@@ -62,6 +63,7 @@ class generated_sys_vid extends model
 			{
 				return false;
 			}
+			$this->push_update(array('mod_name'=>$d));
 			$this->_fields['mod_name'] = $d;
 			return true;
 		}

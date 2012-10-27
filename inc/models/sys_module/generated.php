@@ -1,7 +1,6 @@
 <?
 class generated_sys_module extends model
 {
-	var $_fields = array();
 	var $_table = 'sys_module';
 
 	protected function _keys()
@@ -14,7 +13,7 @@ class generated_sys_module extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'modul_name' => array('Field' => 'modul_name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'label' => array('Field' => 'label','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'smallint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'virtual' => array('Field' => 'virtual','Type' => 'tinyint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +21,14 @@ class generated_sys_module extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function modul_name($d=null)
+	public function modul_name($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +36,14 @@ class generated_sys_module extends model
 			{
 				return false;
 			}
+			$this->push_update(array('modul_name'=>$d));
 			$this->_fields['modul_name'] = $d;
 			return true;
 		}
 		return $this->_fields['modul_name'];
 	}
 
-	function label($d=null)
+	public function label($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +51,14 @@ class generated_sys_module extends model
 			{
 				return false;
 			}
+			$this->push_update(array('label'=>$d));
 			$this->_fields['label'] = $d;
 			return true;
 		}
 		return $this->_fields['label'];
 	}
 
-	function sys_trashcan($d=null)
+	public function sys_trashcan($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +66,14 @@ class generated_sys_module extends model
 			{
 				return false;
 			}
+			$this->push_update(array('sys_trashcan'=>$d));
 			$this->_fields['sys_trashcan'] = $d;
 			return true;
 		}
 		return $this->_fields['sys_trashcan'];
 	}
 
-	function virtual($d=null)
+	public function virtual($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,6 +81,7 @@ class generated_sys_module extends model
 			{
 				return false;
 			}
+			$this->push_update(array('virtual'=>$d));
 			$this->_fields['virtual'] = $d;
 			return true;
 		}

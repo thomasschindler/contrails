@@ -1,7 +1,6 @@
 <?
 class generated_sys_burc extends model
 {
-	var $_fields = array();
 	var $_table = 'sys_burc';
 
 	protected function _keys()
@@ -14,7 +13,7 @@ class generated_sys_burc extends model
 		return array('burc' => array('Field' => 'burc','Type' => 'varchar(20)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'data' => array('Field' => 'data','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_date_created' => array('Field' => 'sys_date_created','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'permanent' => array('Field' => 'permanent','Type' => 'tinyint(1)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function burc($d=null)
+	public function burc($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +21,14 @@ class generated_sys_burc extends model
 			{
 				return false;
 			}
+			$this->push_update(array('burc'=>$d));
 			$this->_fields['burc'] = $d;
 			return true;
 		}
 		return $this->_fields['burc'];
 	}
 
-	function pid($d=null)
+	public function pid($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +36,14 @@ class generated_sys_burc extends model
 			{
 				return false;
 			}
+			$this->push_update(array('pid'=>$d));
 			$this->_fields['pid'] = $d;
 			return true;
 		}
 		return $this->_fields['pid'];
 	}
 
-	function data($d=null)
+	public function data($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +51,14 @@ class generated_sys_burc extends model
 			{
 				return false;
 			}
+			$this->push_update(array('data'=>$d));
 			$this->_fields['data'] = $d;
 			return true;
 		}
 		return $this->_fields['data'];
 	}
 
-	function sys_date_created($d=null)
+	public function sys_date_created($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +66,14 @@ class generated_sys_burc extends model
 			{
 				return false;
 			}
+			$this->push_update(array('sys_date_created'=>$d));
 			$this->_fields['sys_date_created'] = $d;
 			return true;
 		}
 		return $this->_fields['sys_date_created'];
 	}
 
-	function permanent($d=null)
+	public function permanent($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,6 +81,7 @@ class generated_sys_burc extends model
 			{
 				return false;
 			}
+			$this->push_update(array('permanent'=>$d));
 			$this->_fields['permanent'] = $d;
 			return true;
 		}

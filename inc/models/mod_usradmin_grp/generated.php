@@ -1,7 +1,6 @@
 <?
 class generated_mod_usradmin_grp extends model
 {
-	var $_fields = array();
 	var $_table = 'mod_usradmin_grp';
 
 	protected function _keys()
@@ -14,7 +13,7 @@ class generated_mod_usradmin_grp extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(10) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(10) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'name' => array('Field' => 'name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'lang' => array('Field' => 'lang','Type' => 'int(2)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_trashcan' => array('Field' => 'sys_trashcan','Type' => 'tinyint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +21,14 @@ class generated_mod_usradmin_grp extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function pid($d=null)
+	public function pid($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +36,14 @@ class generated_mod_usradmin_grp extends model
 			{
 				return false;
 			}
+			$this->push_update(array('pid'=>$d));
 			$this->_fields['pid'] = $d;
 			return true;
 		}
 		return $this->_fields['pid'];
 	}
 
-	function name($d=null)
+	public function name($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +51,14 @@ class generated_mod_usradmin_grp extends model
 			{
 				return false;
 			}
+			$this->push_update(array('name'=>$d));
 			$this->_fields['name'] = $d;
 			return true;
 		}
 		return $this->_fields['name'];
 	}
 
-	function lang($d=null)
+	public function lang($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +66,14 @@ class generated_mod_usradmin_grp extends model
 			{
 				return false;
 			}
+			$this->push_update(array('lang'=>$d));
 			$this->_fields['lang'] = $d;
 			return true;
 		}
 		return $this->_fields['lang'];
 	}
 
-	function sys_trashcan($d=null)
+	public function sys_trashcan($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,6 +81,7 @@ class generated_mod_usradmin_grp extends model
 			{
 				return false;
 			}
+			$this->push_update(array('sys_trashcan'=>$d));
 			$this->_fields['sys_trashcan'] = $d;
 			return true;
 		}
