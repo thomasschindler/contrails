@@ -34,19 +34,15 @@ class MF{
 	public function &register($instance){
 		$status = $instance->pull();
 
-		MC::log("Status: " . print_r($status, true) . " Instance: " . print_r($instance, true));
-
 		/*if($status['action'] !== factory_actions::Create){
 			log::err("Instance already exists or is not in the created status.");
 			return false;
 		}*/
 		
 		$table = $instance->table_name();
-		MC::log("Table: " . $table);
 
 		$key = $this->create_record($table, $status['data']);
-		MC::log("Key: " . $key);
-
+		
 		if(is_null($key)){
 			log::err("Insertion failed");
 			return null;
@@ -56,7 +52,11 @@ class MF{
 			$this->_instances[$table] = array();
 		}
 
-		$instance->load($status['data']);
+		$instance->clear_status();
+		
+		if(!$instance->load($status['data'])){
+			log::err("Failed to load data from status");
+		}
 
 		$this->_instances[$table][$key] = $instance;
 		return $this->_instances[$table][$key];
@@ -106,6 +106,10 @@ class MF{
 			MC::log("Failed to insert the record into the Database  " . $this->crud()->err_msg);
 			return null;
 		}
+
+		$class = new $table();
+
+		$key = (isset($data[$class->primary_key()]) ? $data[$class->primary_key()] : $key);
 
 		return $key;						
 	}

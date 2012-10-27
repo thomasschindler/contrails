@@ -93,7 +93,18 @@ abstract class model{
 					'action' 	=> $action, 
 					'data' 		=> $data
 				);
-	} 
+	}
+
+	public function clear_status(){
+		$this->_state = array(
+				mstack::Delete 	=> null,
+				mstack::Load 	=> $this->_state[mstack::Load],
+				mstack::Update 	=> null,
+				mstack::Current => null,
+				mstack::Done 	=> null
+			);
+	}
+
 
 	/**
 	 *	Does this object have an update pending?
@@ -104,8 +115,6 @@ abstract class model{
 	public function updated(){
 		return !is_null($this->_state[mstack::Update]);
 	}
-
-
 
 	/**
 	 *	Has this object been changed in any way? (created, deleted or updated)
