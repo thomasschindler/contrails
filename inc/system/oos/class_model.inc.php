@@ -22,14 +22,15 @@ abstract class model{
 		}
 
 		$this->_fields = $data;
-		if($this->push_load($this->_fields) !== exit_status::success)){
+		if($this->push_load($this->_fields) !== exit_status::success)
+		{
 			return null;	
 		}
 
 		return true;
 	}
 
-	public static function new($class, $data){
+	public static function create($class, $data){
 		if(!class_exists($class)){
 			log::err("Attempted to load an unexisting class in the new method '$class'");
 			return null;
@@ -76,10 +77,7 @@ abstract class model{
 		return $return;
 	}
 
-	public abstract function load($data);
-
-
-	public function clone(){
+	public function copy(){
 		/**
 		 *	@todo
 		 */
@@ -125,7 +123,7 @@ abstract class model{
 	 *						position of the state array
 	 */
 	public function updated(){
-		return !is_null($this->_state[mstack::Update];);
+		return !is_null($this->_state[mstack::Update]);
 	}
 
 

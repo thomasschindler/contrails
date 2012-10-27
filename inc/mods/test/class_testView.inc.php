@@ -24,6 +24,8 @@ class test_view extends modView
 
 		MC::debug($b);
 
+		return;
+
 		if($this->access('test'))
 		{
 			$this->set_var('link',$this->lnk(array('event' => 'test')));
