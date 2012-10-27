@@ -12,19 +12,22 @@ class MF{
 		return $instance;
 	}
 
-	public function obtain($table, $key = null, $data = null){
+	public function &obtain($table, $key = null, $data = null){
 		if(is_null($key) === false){
-			return $this->load_record($table, $key);
+			return $this->load_record($table, $key); 
 		}
 
-		if(is_null($data) === false){
-			return $this->create_record($table, $data);
+		if(is_null($data)){
+			return null;
 		}
 
-		return null;
+		$key = $this->create_record($table, $data);
+
+		return $this->load_record($table, $key); 
+
 	}
 
-	private function load_record($table, $key){
+	private function &load_record($table, $key){
 		if(!class_exists($table)){
 			log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
 			return null;
@@ -70,9 +73,8 @@ class MF{
 			return null;
 		}
 
-
-		MC::log("Returned $key");
-		return $this->obtain($table, $key);						
+		MC::log("Returning $key");
+		return $key;						
 	}
 
 	private function store_states(){
@@ -89,6 +91,25 @@ class MF{
 
 	private function do_create($table, $data){
 		return $this->crud()->create($table,$data,array());
+	}
+
+	public function flush(){
+		foreach($this->_instances as $table => $rows){
+			foreach($rows as $id => $instance){
+				$status = $instance->pull();
+				switch($status['action']){
+					case factory_actions::Delete:
+						$this->do_delete($table, $keys);
+						break;
+					case factory_actions::Update:
+						$this->do_update($table, $instance->primary_key(), $id, $status['data']);
+						break;
+					case factory_actions::Create:
+						//Not applicable anymore
+						break;
+				}
+			}
+		}
 	}
 
 	private function crud()

@@ -241,7 +241,7 @@ abstract class model{
 	protected function _valid($value, $type, $size, $nullable = false){
 		switch ($type) {
 			case 'int': 
-				if(is_int($value) === false || ctype_digit($value) === false){
+				if(is_int($value) === false && ctype_digit($value) === false){
 					log::warn("Value '$value' is not an Integer.");
 					return null;
 				}
