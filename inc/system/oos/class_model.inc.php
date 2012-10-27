@@ -143,7 +143,9 @@ abstract class model{
 		return $this->updated() || $this->deleted() || !$this->exists();
 	}
 	
-	private function loaded(){ return false; }
+	private function loaded(){ 
+		return !is_null($this->_state[mstack::Load]); 
+	}
 
 	public function exists(){
 		return !is_null($this->_state[mstack::Load]);
@@ -164,6 +166,7 @@ abstract class model{
 	}
 
 	protected function push_update($data){
+		MC::log(print_r($data, true));
 		if($this->updated() === false){
 			$this->_state[mstack::Update] = $data;
 			return exit_status::success;		

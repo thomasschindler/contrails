@@ -12,7 +12,19 @@ class MF{
 		return $instance;
 	}
 
-	public function obtain($table, $key){
+	public function obtain($table, $key = null, $data = null){
+		if(is_null($key) === false){
+			return $this->load_record($table, $key);
+		}
+
+		if(is_null($data) === false){
+			return $this->create_record($table, $data);
+		}
+
+		return null;
+	}
+
+	private function load_record($table, $key){
 		if(!class_exists($table)){
 			log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
 			return null;
@@ -36,12 +48,31 @@ class MF{
 			return null;
 		}
 
-		$this->_instances[$table][$key] = new $table();
+		$this->_instances[$table][$key] = $mdl;
 		if(!$this->_instances[$table][$key]->load($obj->r())){
 			return null;
 		}
 
 		return $this->_instances[$table][$key];
+	}
+
+	private function create_record($table, $data){
+		MC::log("Table: $table Data: " .print_r($data, true));
+		if(!class_exists($table)){
+			log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
+			return null;
+		}
+
+		$key = $this->do_create($table, $data);
+
+		if($key == -1){
+			MC::log("Failed to insert the record into the Database  " . $this->crud()->err_msg);
+			return null;
+		}
+
+
+		MC::log("Returned $key");
+		return $this->obtain($table, $key);						
 	}
 
 	private function store_states(){
@@ -52,12 +83,12 @@ class MF{
 
 	}
 
-	private function do_update($table, $keys, $data){
-
+	private function do_update($table, $key_column ,$key, $data){
+		return $this->crud()->update($table, $key_column, $key, $data);
 	}
 
 	private function do_create($table, $data){
-
+		return $this->crud()->create($table,$data,array());
 	}
 
 	private function crud()

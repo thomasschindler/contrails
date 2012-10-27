@@ -22,6 +22,11 @@ class test_view extends modView
 
 		$m = MF::singleton();
 		$b = $m->obtain('sys_burc','p108071938_348');
+		if(!$b->pid(500)){
+			MC::log("Failed to update");
+		}
+
+		$c = $m->obtain('test_table', null, array('field2' => 23, 'field1' => 'Something or another'));
 
 		$b->permanent(1);
 
@@ -31,7 +36,7 @@ class test_view extends modView
 
 		//$b->load('p108071938_348');
 
-		MC::debug($b);
+		MC::debug($c);
 
 		return;
 
