@@ -8078,3 +8078,1019 @@ Sat, 27 Oct 2012 14:37:29 +0200
     [permanent] => 1
 )
 '
+Sat, 27 Oct 2012 15:22:06 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:22:06 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:22:06 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:22:06 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:22:06 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:22:06 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:23:54 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:23:54 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:23:54 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:23:54 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:23:54 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:23:55 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:23:55 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:23:55 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:23:55 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:23:55 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:24:28 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:24:29 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:24:45 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:24:45 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:24:46 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:24:46 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:25:03 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:25:04 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:25:04 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:25:32 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:25:32 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:25:32 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:25:33 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:25:33 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:25:33 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:26:19 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:26:19 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:26:19 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:26:19 +0200
+'Array
+(
+    [burc] => 1351344379
+)
+'
+Sat, 27 Oct 2012 15:26:19 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344379
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344379
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344379
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:26:19 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:26:24 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:26:24 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:26:24 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:26:25 +0200
+'Array
+(
+    [burc] => 1351344385
+)
+'
+Sat, 27 Oct 2012 15:26:25 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344385
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344385
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344385
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:26:25 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:27:01 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Array
+(
+    [burc] => 1351344421
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Array
+(
+    [sys_date_created] => 1351344421
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Array
+(
+    [data] => 1351344421
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344421
+            [sys_date_created] => 1351344421
+            [pid] => 555
+            [data] => 1351344421
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344421
+            [sys_date_created] => 1351344421
+            [pid] => 555
+            [data] => 1351344421
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344421
+                    [sys_date_created] => 1351344421
+                    [pid] => 555
+                    [data] => 1351344421
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:27:01 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:27:02 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:27:03 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Array
+(
+    [burc] => 1351344423
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Array
+(
+    [sys_date_created] => 1351344423
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Array
+(
+    [data] => 1351344423
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344423
+            [sys_date_created] => 1351344423
+            [pid] => 555
+            [data] => 1351344423
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344423
+            [sys_date_created] => 1351344423
+            [pid] => 555
+            [data] => 1351344423
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344423
+                    [sys_date_created] => 1351344423
+                    [pid] => 555
+                    [data] => 1351344423
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:27:03 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Array
+(
+    [burc] => 1351344448
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Array
+(
+    [sys_date_created] => 1351344448
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Array
+(
+    [data] => 1351344448
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344448
+            [sys_date_created] => 1351344448
+            [pid] => 555
+            [data] => 1351344448
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344448
+            [sys_date_created] => 1351344448
+            [pid] => 555
+            [data] => 1351344448
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344448
+                    [sys_date_created] => 1351344448
+                    [pid] => 555
+                    [data] => 1351344448
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:27:28 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:27:29 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Array
+(
+    [burc] => 1351344449
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Array
+(
+    [sys_date_created] => 1351344449
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Array
+(
+    [data] => 1351344449
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344449
+            [sys_date_created] => 1351344449
+            [pid] => 555
+            [data] => 1351344449
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344449
+            [sys_date_created] => 1351344449
+            [pid] => 555
+            [data] => 1351344449
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344449
+                    [sys_date_created] => 1351344449
+                    [pid] => 555
+                    [data] => 1351344449
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:27:29 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [burc] => 1351344556
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [sys_date_created] => 1351344556
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [data] => 1351344556
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344556
+            [sys_date_created] => 1351344556
+            [pid] => 555
+            [data] => 1351344556
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344556
+            [sys_date_created] => 1351344556
+            [pid] => 555
+            [data] => 1351344556
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344556
+                    [sys_date_created] => 1351344556
+                    [pid] => 555
+                    [data] => 1351344556
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:29:16 +0200
+'Array
+(
+    [burc] => whatever
+)
+'
+Sat, 27 Oct 2012 15:29:17 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:17 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:29:18 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Array
+(
+    [burc] => 1351344558
+)
+'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Array
+(
+    [sys_date_created] => 1351344558
+)
+'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Array
+(
+    [data] => 1351344558
+)
+'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344558
+            [sys_date_created] => 1351344558
+            [pid] => 555
+            [data] => 1351344558
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344558
+            [sys_date_created] => 1351344558
+            [pid] => 555
+            [data] => 1351344558
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344558
+                    [sys_date_created] => 1351344558
+                    [pid] => 555
+                    [data] => 1351344558
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:29:18 +0200
+'Array
+(
+    [burc] => whatever
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [burc] => 1351344588
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [sys_date_created] => 1351344588
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [data] => 1351344588
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344588
+            [sys_date_created] => 1351344588
+            [pid] => 555
+            [data] => 1351344588
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344588
+            [sys_date_created] => 1351344588
+            [pid] => 555
+            [data] => 1351344588
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344588
+                    [sys_date_created] => 1351344588
+                    [pid] => 555
+                    [data] => 1351344588
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:29:48 +0200
+'Array
+(
+    [burc] => whatever
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [burc] => 1351344589
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [sys_date_created] => 1351344589
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [pid] => 555
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [data] => 1351344589
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Status: Array
+(
+    [action] => 0
+    [data] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344589
+            [sys_date_created] => 1351344589
+            [pid] => 555
+            [data] => 1351344589
+        )
+
+)
+ Instance: sys_burc Object
+(
+    [_fields:protected] => Array
+        (
+            [permanent] => 1
+            [burc] => 1351344589
+            [sys_date_created] => 1351344589
+            [pid] => 555
+            [data] => 1351344589
+        )
+
+    [_state:model:private] => Array
+        (
+            [0] => 
+            [1] => 
+            [2] => Array
+                (
+                    [permanent] => 1
+                    [burc] => 1351344589
+                    [sys_date_created] => 1351344589
+                    [pid] => 555
+                    [data] => 1351344589
+                )
+
+            [3] => 
+            [4] => 
+        )
+
+)
+'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Table: sys_burc'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Key: 0'
+Sat, 27 Oct 2012 15:29:49 +0200
+'Array
+(
+    [burc] => whatever
+)
+'

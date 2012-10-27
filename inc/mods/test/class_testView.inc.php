@@ -21,12 +21,13 @@ class test_view extends modView
 	{
 
 		// pull data 
-		$b1 = &$this->MF->obtain('sys_burc','p108071938_348');
+		$b1 = &$this->MOF->obtain('sys_burc','p108071938_348');
 		// modify data
 		$b1->permanent(1);
 
+		
 		// create a new object
-		$b2 = &$this->MF->obtain('sys_burc',array
+		$b2 = &$this->MOF->obtain('sys_burc',array
 			(
 				'burc' =>'test',
 				'pid' => 500,
@@ -36,9 +37,19 @@ class test_view extends modView
 			));
 		
 		// create a new empty object
-		$b3 = &$this->MF->obtain('sys_burc');
-		$b3->permanent(1);		
-		$this->MC->register($b3);
+		$b3 = &$this->MOF->obtain('sys_burc');
+		
+		$b3->permanent(1);
+		$b3->burc(time());
+		$b3->sys_date_created(time());
+		$b3->pid(555);
+		$b3->data(time());
+
+		$this->MOF->register($b3);
+		
+		$b3->burc('whatever');
+
+		MC::debug($b3);
 
 		/*
 
