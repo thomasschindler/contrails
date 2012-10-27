@@ -13,11 +13,7 @@ class generated_sys_burc extends model
 		return array('burc' => array('Field' => 'burc','Type' => 'varchar(20)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'data' => array('Field' => 'data','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'sys_date_created' => array('Field' => 'sys_date_created','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'permanent' => array('Field' => 'permanent','Type' => 'tinyint(1)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-<<<<<<< HEAD
-	function burc($d=null)
-=======
 	public function burc($d=null)
->>>>>>> master
 	{
 		if($d !== null)
 		{

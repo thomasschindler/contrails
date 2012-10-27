@@ -13,11 +13,7 @@ class generated_sys_log extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11)','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => '',),'time' => array('Field' => 'time','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'project' => array('Field' => 'project','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'url' => array('Field' => 'url','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'pid' => array('Field' => 'pid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'mod' => array('Field' => 'mod','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'event' => array('Field' => 'event','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'files' => array('Field' => 'files','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'post' => array('Field' => 'post','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'get' => array('Field' => 'get','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'ip' => array('Field' => 'ip','Type' => 'varchar(30)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'session' => array('Field' => 'session','Type' => 'varchar(40)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'browser' => array('Field' => 'browser','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'uid' => array('Field' => 'uid','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'name' => array('Field' => 'name','Type' => 'varchar(255)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'referer' => array('Field' => 'referer','Type' => 'text','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-<<<<<<< HEAD
-	function id($d=null)
-=======
 	public function id($d=null)
->>>>>>> master
 	{
 		if($d !== null)
 		{

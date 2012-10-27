@@ -7970,3 +7970,75 @@ Sat, 27 Oct 2012 14:09:06 +0200
     [permanent] => 1
 )
 '
+Sat, 27 Oct 2012 14:20:52 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:20:53 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:22:53 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:22:55 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:24:05 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:24:06 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:24:18 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:24:18 +0200
+'Table: sys_burc Data: Array
+(
+    [burc] => test
+    [pid] => 500
+    [permanent] => 1
+    [data] => da
+    [sys_date_created] => 1348350503
+)
+'
+Sat, 27 Oct 2012 14:24:18 +0200
+'Returning 0'
+Sat, 27 Oct 2012 14:24:18 +0200
+'Array
+(
+    [permanent] => 1
+)
+'
+Sat, 27 Oct 2012 14:24:18 +0200
+'Table: sys_burc Data: Array
+(
+    [burc] => test
+    [pid] => 500
+    [permanent] => 1
+    [data] => da
+    [sys_date_created] => 1348350503
+)
+'
+Sat, 27 Oct 2012 14:24:18 +0200
+'Failed to insert the record into the Database  Query failed due to error: Duplicate entry \'test\' for key \'PRIMARY\''

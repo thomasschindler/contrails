@@ -1,7 +1,6 @@
 <?
 class generated_uftp_watchers extends model
 {
-	var $_fields = array();
 	var $_table = 'uftp_watchers';
 
 	protected function _keys()
@@ -14,7 +13,7 @@ class generated_uftp_watchers extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11) unsigned','Null' => 'NO','Key' => 'PRI','Default' => NULL,'Extra' => 'auto_increment',),'user_id' => array('Field' => 'user_id','Type' => 'int(11)','Null' => 'YES','Key' => 'MUL','Default' => NULL,'Extra' => '',),'fuck_id' => array('Field' => 'fuck_id','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'created_at' => array('Field' => 'created_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'updated_at' => array('Field' => 'updated_at','Type' => 'int(11)','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
-	function id($d=null)
+	public function id($d=null)
 	{
 		if($d !== null)
 		{
@@ -22,13 +21,14 @@ class generated_uftp_watchers extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function user_id($d=null)
+	public function user_id($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +36,14 @@ class generated_uftp_watchers extends model
 			{
 				return false;
 			}
+			$this->push_update(array('user_id'=>$d));
 			$this->_fields['user_id'] = $d;
 			return true;
 		}
 		return $this->_fields['user_id'];
 	}
 
-	function fuck_id($d=null)
+	public function fuck_id($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +51,14 @@ class generated_uftp_watchers extends model
 			{
 				return false;
 			}
+			$this->push_update(array('fuck_id'=>$d));
 			$this->_fields['fuck_id'] = $d;
 			return true;
 		}
 		return $this->_fields['fuck_id'];
 	}
 
-	function created_at($d=null)
+	public function created_at($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +66,14 @@ class generated_uftp_watchers extends model
 			{
 				return false;
 			}
+			$this->push_update(array('created_at'=>$d));
 			$this->_fields['created_at'] = $d;
 			return true;
 		}
 		return $this->_fields['created_at'];
 	}
 
-	function updated_at($d=null)
+	public function updated_at($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,6 +81,7 @@ class generated_uftp_watchers extends model
 			{
 				return false;
 			}
+			$this->push_update(array('updated_at'=>$d));
 			$this->_fields['updated_at'] = $d;
 			return true;
 		}
