@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>Unfuck the Planet</title>
-    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
-    <link href="resource/css/base.css" rel="stylesheet">
+    <link href="/template/unfucktheplanet/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+    <link href="/template/unfucktheplanet/resource/css/base.css" rel="stylesheet">
   </head>
   <body>
     <div id="server-error">Oh wow, something seems to have gone wrong. Unfuck the server!</div>
@@ -127,8 +127,8 @@
 
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.1/jquery.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jqueryui/1.8.23/jquery-ui.min.js"></script>
-    <script src="bootstrap/js/bootstrap.min.js"></script>
-    <script src="resource/js/fileuploader.js"></script>
-    <script src="resource/js/base.js"></script>
+    <script src="/template/unfucktheplanet/bootstrap/js/bootstrap.min.js"></script>
+    <script src="/template/unfucktheplanet/resource/js/fileuploader.js"></script>
+    <script src="/template/unfucktheplanet/resource/js/base.js"></script>
   </body>
 </html>
