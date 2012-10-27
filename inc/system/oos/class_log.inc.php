@@ -67,18 +67,19 @@ class log
 	}
 
 	public static function msg($text, $level){
-		$logpath = CONF::logpath() . CONF::project_name() . "/" . date("Ymd") . "/" . session_id();
-		mkdir($logpath, "0777", true);
-
+		$logpath = CONF::dir('log') . CONF::project_name() . "/" . date("Ymd") . "/" . session_id();
+		if(!is_dir($logpath)){
+			//echo $logpath;
+			//mkdir($logpath, "0777", true);
+		}
 		switch ($level) {
 			case error_message_level::error:
 				//@todo: Decide on a message body!
-				mail(CONF::notification(), CONF::project_name() . ' - Error (Session: ' . session_id(), $msg);
+				//mail(CONF::notification(), CONF::project_name() . ' - Error (Session: ' . session_id(), $text);
 			case error_message_level::warning:
 			case error_message_level::debug:
-				$logpath = CONF::log_path() . date("") . "/" . session_id();
-				mkdir($logpath, '0777', true);
-				MC::log("Message >> Level " . error_message_level::s($level) . " >> $msg", "messages.log" , $logpath);
+				//MC::log("Message >> Level " . error_message_level::s($level) . " >> $msg", "messages.log" , $logpath);
+				MC::log("Message >> Level " . error_message_level::s($level) . " >> $text");
 				break;
 		}
 	}

@@ -1,7 +1,6 @@
 <?
 class generated_sys_mc_listeners extends model
 {
-	var $_fields = array();
 	var $_table = 'sys_mc_listeners';
 
 	protected function _keys()
@@ -14,7 +13,11 @@ class generated_sys_mc_listeners extends model
 		return array('id' => array('Field' => 'id','Type' => 'int(11) unsigned','Null' => 'NO','Key' => 'MUL','Default' => NULL,'Extra' => '',),'mod_shout' => array('Field' => 'mod_shout','Type' => 'varchar(200)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'event_shout' => array('Field' => 'event_shout','Type' => 'varchar(200)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'mod_listen' => array('Field' => 'mod_listen','Type' => 'varchar(200)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'event_listen' => array('Field' => 'event_listen','Type' => 'varchar(200)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'att_listen' => array('Field' => 'att_listen','Type' => 'text','Null' => 'YES','Key' => '','Default' => NULL,'Extra' => '',),'start' => array('Field' => 'start','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),'stop' => array('Field' => 'stop','Type' => 'int(11)','Null' => 'NO','Key' => '','Default' => '2147483647','Extra' => '',),'pre' => array('Field' => 'pre','Type' => 'tinyint(1) unsigned','Null' => 'NO','Key' => '','Default' => NULL,'Extra' => '',),);
 	}
 
+<<<<<<< HEAD
 	function id($d=null)
+=======
+	public function id($d=null)
+>>>>>>> master
 	{
 		if($d !== null)
 		{
@@ -22,13 +25,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('id'=>$d));
 			$this->_fields['id'] = $d;
 			return true;
 		}
 		return $this->_fields['id'];
 	}
 
-	function mod_shout($d=null)
+	public function mod_shout($d=null)
 	{
 		if($d !== null)
 		{
@@ -36,13 +40,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('mod_shout'=>$d));
 			$this->_fields['mod_shout'] = $d;
 			return true;
 		}
 		return $this->_fields['mod_shout'];
 	}
 
-	function event_shout($d=null)
+	public function event_shout($d=null)
 	{
 		if($d !== null)
 		{
@@ -50,13 +55,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('event_shout'=>$d));
 			$this->_fields['event_shout'] = $d;
 			return true;
 		}
 		return $this->_fields['event_shout'];
 	}
 
-	function mod_listen($d=null)
+	public function mod_listen($d=null)
 	{
 		if($d !== null)
 		{
@@ -64,13 +70,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('mod_listen'=>$d));
 			$this->_fields['mod_listen'] = $d;
 			return true;
 		}
 		return $this->_fields['mod_listen'];
 	}
 
-	function event_listen($d=null)
+	public function event_listen($d=null)
 	{
 		if($d !== null)
 		{
@@ -78,13 +85,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('event_listen'=>$d));
 			$this->_fields['event_listen'] = $d;
 			return true;
 		}
 		return $this->_fields['event_listen'];
 	}
 
-	function att_listen($d=null)
+	public function att_listen($d=null)
 	{
 		if($d !== null)
 		{
@@ -92,13 +100,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('att_listen'=>$d));
 			$this->_fields['att_listen'] = $d;
 			return true;
 		}
 		return $this->_fields['att_listen'];
 	}
 
-	function start($d=null)
+	public function start($d=null)
 	{
 		if($d !== null)
 		{
@@ -106,13 +115,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('start'=>$d));
 			$this->_fields['start'] = $d;
 			return true;
 		}
 		return $this->_fields['start'];
 	}
 
-	function stop($d=null)
+	public function stop($d=null)
 	{
 		if($d !== null)
 		{
@@ -120,13 +130,14 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('stop'=>$d));
 			$this->_fields['stop'] = $d;
 			return true;
 		}
 		return $this->_fields['stop'];
 	}
 
-	function pre($d=null)
+	public function pre($d=null)
 	{
 		if($d !== null)
 		{
@@ -134,6 +145,7 @@ class generated_sys_mc_listeners extends model
 			{
 				return false;
 			}
+			$this->push_update(array('pre'=>$d));
 			$this->_fields['pre'] = $d;
 			return true;
 		}

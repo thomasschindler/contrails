@@ -5,8 +5,11 @@
 	 *
 	 */
 	final class mstack{
-		const Load 		= 0;
-		const Update 	= 1;
-		const Current 	= 2;
-		const Final 	= 3;
+
+		const Delete 	= 0;
+		const Load 		= 1;
+		const Update 	= 2;
+		const Current 	= 3;
+		const Done 		= 4;
+
 	} 

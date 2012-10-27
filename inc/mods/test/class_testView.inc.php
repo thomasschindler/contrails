@@ -20,12 +20,26 @@ class test_view extends modView
 	function test()
 	{
 
-		$b = new sys_burc();
+		
+		$b = &$this->MF->obtain('sys_burc','p108071938_348');
+
+		$b->permanent(1);
+
+		//$c = $m->obtain('test_table', null, array('field2' => 23, 'field1' => 'Something or another'));
+
+		///$b->permanent(1);
+
+		//$b->save();
+
+		//$b = new sys_burc();
+
+		//$b->load('p108071938_348');
 
 		MC::debug($b);
 
 		return;
 
+<<<<<<< HEAD
 /*
 		$this->facebook = new Facebook(array(
 		  'appId'  => '492651730746756',
@@ -69,6 +83,8 @@ class test_view extends modView
 		
 		/*
 
+=======
+>>>>>>> master
 		if($this->access('test'))
 		{
 			$this->set_var('link',$this->lnk(array('event' => 'test')));

@@ -9,6 +9,7 @@ class test_action extends modAction
 	{
 		switch(strtolower($action['event'])) 
 		{
+			case 'load':			$this->load_model();					break;
 			case 'test':			$this->test();							break;
 		}		
 	}
@@ -26,6 +27,12 @@ class test_action extends modAction
 		}
 		// write the data 
 		return;
+	}
+
+	function load_model(){
+		$MF = MC::singleton();
+		$instance = $MF->obtain('test_table', 1);
+		var_dump($instance);
 	}
 }
 ?>

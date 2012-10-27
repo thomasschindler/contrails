@@ -4,7 +4,7 @@
 	 *	abstract class. The point is to avoid magic numbers and use meaningful names for the positions.
 	 *
 	 */
-	final class return{
+	final class exit_status{
 		const error 	= -1;
 		const no_change = 0;
 		const success 	= 1;

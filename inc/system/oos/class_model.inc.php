@@ -1,6 +1,8 @@
 <?
 
 abstract class model{
+	protected $_fields;
+
 	private $_error_messages = array();
 
 	private $_state = array(
@@ -11,11 +13,29 @@ abstract class model{
 				mstack::Done 	=> null
 			);
 
-	private function __construct(){
-		MF::store(&$this);		
-	} 
+	public function __construct(){} 
 
-	public static function new($class, $data){
+	public function primary_key(){
+		$keys = $this->_keys();
+		return $keys['0']['fields']['0'];
+	}
+
+	public function load($data){
+		if($this->loaded()){
+			log::err("Attempting to load an already existing instance.");
+			return null;
+		}
+
+		$this->_fields = $data;
+		if($this->push_load($this->_fields) !== exit_status::success)
+		{
+			return null;	
+		}
+
+		return true;
+	}
+
+	public static function create($class, $data){
 		if(!class_exists($class)){
 			log::err("Attempted to load an unexisting class in the new method '$class'");
 			return null;
@@ -31,7 +51,7 @@ abstract class model{
 			return null;
 		}
 
-		if($instance->push_create($data) !== return::success){
+		if($instance->push_create($data) !== exit_status::success){
 			log::err("Failed to push the creation state of the object to the change stack.");
 			return null;
 		}
@@ -50,22 +70,19 @@ abstract class model{
 		$rows = $CRUD->load_range($table_name, array('id'), $data);
 		$return = array();
 
-		if($rows->nr() <= 0){
+		if(!$rows || $rows->nr() <= 0){
 			return null;
 		}
 
 		while($rows->next()){
-			$instance = MF::obtain($table_name, $rows->f('id'));
+			$instance = $this->MF()->obtain($table_name, $rows->f('id'));
 			$return[] = $instance;
 		}
 
 		return $return;
 	}
 
-	public abstract function load($data);
-
-
-	public function clone(){
+	public function copy(){
 		/**
 		 *	@todo
 		 */
@@ -111,7 +128,7 @@ abstract class model{
 	 *						position of the state array
 	 */
 	public function updated(){
-		return !is_null($this->_state[mstack::Update];);
+		return !is_null($this->_state[mstack::Update]);
 	}
 
 
@@ -126,6 +143,10 @@ abstract class model{
 		return $this->updated() || $this->deleted() || !$this->exists();
 	}
 	
+	private function loaded(){ 
+		return !is_null($this->_state[mstack::Load]); 
+	}
+
 	public function exists(){
 		return !is_null($this->_state[mstack::Load]);
 	}
@@ -137,46 +158,47 @@ abstract class model{
 	protected function push_load($data){
 		if(!is_null($this->_state[mstack::Load])){
 			log::warn("Attempting to reload an already loaded object. This shouldn't happen.");
-			return return::no_change;
+			return exit_status::no_change;
 		}
 
 		$this->_state[mstack::Load] = $data;
-		return return::success;	
+		return exit_status::success;	
 	}
 
 	protected function push_update($data){
+		MC::log(print_r($data, true));
 		if($this->updated() === false){
 			$this->_state[mstack::Update] = $data;
-			return return::success;		
+			return exit_status::success;		
 		}
 
 		if($this->deleted()){
 			log::err("Cannot update a model that is marked for deletion.");
-			return return::error;
+			return exit_status::error;
 		}
 
 		foreach($data as $key => $value){
 			$this->_state[mstack::Update][$key] = $value;
 		}
 
-		return return::success;
+		return exit_status::success;
 	}
 
 	protected function push_create($data){
 		if($this->exists()){
 			log::err("Cannot reinsert an object on the database. If you need to clone a row, use the clone method instead.");
-			return return::error;
+			return exit_status::error;
 		}
 
 		$this->_state[mstack::Update] = $data;
 
-		return return::success;
+		return exit_status::success;
 	} 
 	
 	protected function push_delete(){
 		if($this->deleted()){
 			log::warn("Object has already been deleted.");
-			return return::no_change;
+			return exit_status::no_change;
 		}
 
 		if($this->changed() || $this->exists() === false){
@@ -185,7 +207,7 @@ abstract class model{
 
 		$this->_state[mstack::Delete] = true;
 
-		return return::success;
+		return exit_status::success;
 	}
 
 	private function validate_data($data, $complete_unexisting = false){
@@ -214,6 +236,45 @@ abstract class model{
 		}
 
 		return $data;
+	}
+
+	protected function _valid($value, $type, $size, $nullable = false){
+		switch ($type) {
+			case 'int': 
+				if(is_int($value) === false || ctype_digit($value) === false){
+					log::warn("Value '$value' is not an Integer.");
+					return null;
+				}
+				//Just to make sure we also get the correct value if it happened to be a string containing a number
+				$value = intval($value);
+
+				if($value > mysql_int_range::Min && $value > mysql_int_range::Max){
+					log::warn("Value '$value' is out of range for a MySQL Integer.");
+					return null;
+				}
+				break;
+			case 'varchar'; break;
+				if(is_string($value) === false){
+					log::warn("Sent in value does not translate to a valid string.");
+					return null;
+				}
+				$len = strlen($value);
+				if($len > $size){
+					log::warn("The string '$value' is too long ($len) for the maximum size allowed ($size). The string will be truncated to $size characters.");
+				}
+				break;
+			case 'float': 
+				/* @todo */
+				break;
+			default:
+				break;
+		}
+
+		return true;
+	}
+
+	protected function MF(){
+		return MF::singleton();
 	}
 
 }

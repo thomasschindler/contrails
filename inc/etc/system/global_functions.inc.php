@@ -4,6 +4,7 @@
 	// autoloader
 	function __autoload($classname) 
 	{
+		// 
 		global $__autoload_models;
 		// handle models:
 		if(count($__autoload_models) == 0)
@@ -13,11 +14,25 @@
 
 		if(in_array($classname,$__autoload_models))
 		{
-			require_once require CONF::inc_dir()."/system/oos/class_model.inc.php";
+			require_once CONF::inc_dir()."/system/oos/class_model.inc.php";
 			require_once CONF::inc_dir()."/models/".strtolower($classname)."/generated.php";
 			require_once CONF::inc_dir()."/models/".strtolower($classname)."/model.php";
 			return;
 		}
+
+		global $__autoload_constants;
+		// handle models:
+		if(count($__autoload_constants) == 0)
+		{
+			$__autoload_constants = scandir(CONF::inc_dir()."/constants/");
+		}
+
+		if(in_array(strtolower($classname).".inc.php",$__autoload_constants))
+		{
+			require_once CONF::inc_dir()."/constants/".strtolower($classname).".inc.php";
+			return;
+		}
+
 		// 
 		if (file_exists(CONF::inc_dir()."/system/oos/class_".strtolower($classname).".inc.php"))
 		{

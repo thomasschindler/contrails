@@ -351,6 +351,7 @@ class modView {
 		$this->DB     = &DB::singleton();
 		$this->CRUD   = &db_crud::singleton();
 		$this->CRUD->load_return_object(); // set to return an object 
+		$this->MF 	  = &MF::singleton();
 		
 		$this->SESS   = &SESS::singleton();
 		$this->CLIENT = &CLIENT::singleton();
