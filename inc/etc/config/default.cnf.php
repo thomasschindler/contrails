@@ -5,6 +5,18 @@
 */
 class HOST_CONF 
 {
+	function dir($s)
+	{
+		$dir = array
+		(
+			'log' => '/tmp/'
+		);
+		if(isset($dir[$s]))
+		{
+			return $dir[$s];
+		}
+		return false;
+	}
 	function cache()
 	{
 		return 0;

@@ -20,7 +20,12 @@ class test_view extends modView
 	function test()
 	{
 
-		$b = new sys_burc();
+		$m = MF::singleton();
+		$b = $m->obtain('sys_burc','p108071938_348');
+
+		//$b = new sys_burc();
+
+		//$b->load('p108071938_348');
 
 		MC::debug($b);
 

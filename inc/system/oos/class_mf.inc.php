@@ -32,7 +32,7 @@ class MF{
 			return null;
 		}
 
-		return &$this->_instances[$table][$key];
+		return $this->_instances[$table][$key];
 	}
 
 	private function store_states(){
@@ -49,6 +49,11 @@ class MF{
 
 	private function do_create($table, $data){
 
+	}
+
+	private function crud()
+	{
+		return DB_CRUD::singleton();
 	}
 
 
