@@ -12,19 +12,50 @@ class MF{
 		return $instance;
 	}
 
-	public function &obtain($table, $key = null, $data = null){
-		if(is_null($key) === false){
-			return $this->load_record($table, $key); 
+	public function &obtain($table, $data = null){
+		if(is_null($data)){
+			if(!class_exists($table)){
+				log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
+				return null;
+			}
+
+			return new $table();
 		}
 
-		if(is_null($data)){
-			return null;
+		if(is_array($data) === false){
+			return $this->load_record($table, $data); 
 		}
 
 		$key = $this->create_record($table, $data);
+		return $this->load_record($table, $key);
 
-		return $this->load_record($table, $key); 
+	}
 
+	public function &register($instance){
+		$status = $instance->pull();
+
+		if($status['action'] !== factory_actions::Create){
+			log::err("Instance already exists or is not in the created status.");
+			return false;
+		}
+		
+		$table = $instance->table_name();
+
+		$key = $this->create_record($table, $status['data']);
+
+		if(is_null($key)){
+			log::err("Insertion failed");
+			return null;
+		}
+
+		if(!isset($this->_instances[$table])){
+			$this->_instances[$table] = array();
+		}
+
+		$instance->load($status['data']);
+
+		$this->_instances[$table][$key] = $instance;
+		return $this->_instances[$table][$key];
 	}
 
 	private function &load_record($table, $key){
@@ -60,7 +91,6 @@ class MF{
 	}
 
 	private function create_record($table, $data){
-		MC::log("Table: $table Data: " .print_r($data, true));
 		if(!class_exists($table)){
 			log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
 			return null;
@@ -73,9 +103,10 @@ class MF{
 			return null;
 		}
 
-		MC::log("Returning $key");
 		return $key;						
 	}
+
+
 
 	private function store_states(){
 
