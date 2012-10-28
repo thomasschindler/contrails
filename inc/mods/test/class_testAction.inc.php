@@ -11,8 +11,19 @@ class test_action extends modAction
 		{
 			case 'load':			$this->load_model();					break;
 			case 'test':			$this->test();							break;
+			case 'api':				$this->api();							break;
 		}		
 	}
+
+	function api()
+	{
+		return array
+		(
+			'status' => 200,
+			'data' => array('some'=>'thing','someother'=>'thing')
+		);
+	}
+
 	/**
 	*	sample event
 	*/

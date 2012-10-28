@@ -101,7 +101,7 @@
 *
 * 
 */
-ob_start();
+//ob_start();
 // parse the data
 $tmp = explode("/",$_REQUEST['_rewrite_file']);
 // add the arguments from the path:
@@ -186,7 +186,7 @@ if(@$cache)
 // from here on we need oos
 // prepare for oos
 // pid:
-include_once('../inc/oos.sys');
+include_once('../inc/bootstrap.php');
 if(!@$_REQUEST['pid'])
 {
 	$data['pid'] = CONF::pid();

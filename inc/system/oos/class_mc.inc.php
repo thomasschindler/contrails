@@ -461,7 +461,7 @@ class MC {
 			}
 		}
 
-		if (!is_file($file)) { MC::debug($file, 'MISSING: ' . $this->__current_mod); }
+		if (!is_file($file)) { return array(); //MC::debug($file, 'MISSING: ' . $this->__current_mod);  }
 
 		include($file);								// probably not testable
 		$this->configs['table'][$table] = $conf;
