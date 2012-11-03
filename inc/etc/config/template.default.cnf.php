@@ -23,7 +23,7 @@ class HOST_CONF
 	}
 	function default_layout()
 	{
-		return 'oos';
+		return 'contrails';
 	}
 	function default_pages()
 	{

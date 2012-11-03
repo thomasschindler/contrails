@@ -20,7 +20,7 @@
 
 
 // include some necesary files
-$start = microtime();
+$start = time();
 $tmp = pathinfo(__FILE__);
 $base = substr($tmp['dirname'],0,-6);
 $conf = isset($argv[2]) ? $argv[2] : 'default';
@@ -57,7 +57,7 @@ switch(trim(@$argv[1]))
 		help();
 }
 
-verbose("DONE [".($start-microtime())."]");
+verbose("DONE [".(time()-$start)."]");
 
 /**
 *	show some help
