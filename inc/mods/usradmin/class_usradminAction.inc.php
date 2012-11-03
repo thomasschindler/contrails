@@ -358,14 +358,7 @@
 			
 			$cnf_methods = get_class_methods("CONF");
 			
-			if(!in_array("uid",$cnf_methods))
-			{
-				$select = "SELECT usr, pwd FROM ".$this->tbl_usr." WHERE lang = '".e::id(CONF::lang())."' AND lang_default";
-			}
-			else
-			{
-				$select = "SELECT usr, pwd FROM ".$this->tbl_usr." WHERE id = ".CONF::guest();
-			}
+			$select = "SELECT usr, pwd FROM ".$this->tbl_usr." WHERE id = ".CONF::guest();
 
 			$default = $this->DB->query($select);
 

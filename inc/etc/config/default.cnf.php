@@ -47,7 +47,6 @@ class HOST_CONF
 	}
 	function guest()
 	{
-		//return 122;
 		return 200;
 	}
 	function su()
