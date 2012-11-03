@@ -1,1 +1,0 @@
-<?class uftp_unfucks extends generated_uftp_unfucks {} ?>

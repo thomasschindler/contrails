@@ -1,1 +1,0 @@
-<?class uftp_invitations extends generated_uftp_invitations {} ?>
