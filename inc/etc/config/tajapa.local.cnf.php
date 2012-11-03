@@ -27,11 +27,11 @@ class HOST_CONF
 	}
 	function project_name()
 	{
-		return '__PROJECT_NAME__';
+		return 'tajapa';
 	}
 	function baseurl()
 	{
-		return '__URL__';
+		return 'http://tajapa.local';
 	}
 	function default_layout()
 	{
@@ -68,10 +68,10 @@ class HOST_CONF
 			'master' => array
 			(
 				'db_type' => 'mysql',
-				'db_host' => '__DB_HOST__',
-				'db_user' => '__DB_USER__',
-				'db_pass' => '__DB_PASS__', 
-				'db_name' => '__DB_NAME__',
+				'db_host' => 'localhost',
+				'db_user' => 'root',
+				'db_pass' => 'root', 
+				'db_name' => 'tajapa',
 			)
 		);
 	}
