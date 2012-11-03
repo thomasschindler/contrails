@@ -1,0 +1,1 @@
+<?class tajapa_currency extends generated_tajapa_currency {} ?>

@@ -61,6 +61,10 @@ class HOST_CONF
 	{
 		return 348;
 	}
+	function notification()
+	{
+		return 'tajapa@hotoshi.com';
+	}
 	function db_options() 
 	{
 		return array

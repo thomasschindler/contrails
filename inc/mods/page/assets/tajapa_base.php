@@ -2,25 +2,25 @@
 <html lang="en">
   <head>
     <meta content="width=device-width, initial-scale=1.0" name="viewport" />
-    <title>contrails</title>
-    <link href="/template/contrails/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="/template/contrails/bootstrap/css/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="/template/contrails/contrails/css/contrails.css" media="screen" rel="stylesheet" type="text/css" />
-    <link href="/template/contrails/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css" />
+    <title>tajapa</title>
+    <link href="/template/tajapa/bootstrap/css/bootstrap.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/template/tajapa/bootstrap/css/bootstrap-responsive.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/template/tajapa/tajapa/css/tajapa.css" media="screen" rel="stylesheet" type="text/css" />
+    <link href="/template/tajapa/colorbox/colorbox.css" media="screen" rel="stylesheet" type="text/css" />
     
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1/jquery.min.js"></script>
-    <script src="/template/contrails/bootstrap/js/bootstrap.js"></script>
-    <script src="/template/contrails/colorbox/jquery.colorbox-min.js"></script>
-    <script src="/template/contrails/contrails/js/contrails.js"></script>
+    <script src="/template/tajapa/bootstrap/js/bootstrap.js"></script>
+    <script src="/template/tajapa/colorbox/jquery.colorbox-min.js"></script>
+    <script src="/template/tajapa/tajapa/js/tajapa.js"></script>
 
-    <link rel="shortcut icon" href="/template/contrails/contrails/img/favicon.ico" />
+    <link rel="shortcut icon" href="/template/tajapa/tajapa/img/favicon.ico" />
 
   </head>
   <body>
     <div id="logo">
-      <img src="/template/contrails/contrails/img/logo.png"/>
+      <img src="/template/tajapa/tajapa/img/logo.png"/>
       <br/>
-      contrails
+      tajapa
     </div>
     <div class="navbar navbar-static-top">
       <div class="container">
