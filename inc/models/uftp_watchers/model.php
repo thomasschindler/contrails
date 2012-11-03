@@ -1,1 +1,0 @@
-<?class uftp_watchers extends generated_uftp_watchers {} ?>

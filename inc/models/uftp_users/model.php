@@ -1,1 +1,0 @@
-<?class uftp_users extends generated_uftp_users {} ?>
