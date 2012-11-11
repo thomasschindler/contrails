@@ -1,5 +1,5 @@
 <?
-class generated_mod_usradmin_usr extends model
+class generated_mod_usradmin_usr_ extends model
 {
 
 	protected function _keys()
@@ -14,7 +14,7 @@ class generated_mod_usradmin_usr extends model
 
 	public function table_name()
 	{
-		return 'mod_usradmin_usr';
+		return 'mod_usradmin_usr_';
 	}
 
 

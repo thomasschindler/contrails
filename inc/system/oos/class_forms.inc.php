@@ -116,6 +116,15 @@ class FORMS
 				$this->button($event,$label);
 			}
 		}
+		// set the hidden fields
+		foreach($this->conf['fields'] as $field => $data)
+		{
+			if($data['cnf']['type'] == 'hidden')
+			{
+				$this->hidden('data['.$field.']',$data['cnf']['value']);
+				unset($this->conf['fields'][$field]);
+			}
+		}
 		// add at least the current mod as a hidden field
 		$this->hidden('mod',$this->OPC->current_mod());
 	}
@@ -125,6 +134,7 @@ class FORMS
 	*/
 	function show($name='form',$hook=null,$anchor=null)
 	{
+		//@TODO: only do this if we don't have values present!!!
 		$this->set_values($_POST['data']);
 		return $this->start($name,'POST',false,null,$hook,$anchor).$this->fields().$this->end();
 	}
@@ -279,7 +289,7 @@ class FORMS
 		$ret .= '<div class="form-actions">';
 		foreach($this->field_button as $b) 
 		{
-			$ret .= '<button name="'.$b[0].'" '.$b[2].' type="submit" class="btn'.(!isset($primary)?' btn-primary':'').'">'.$b[1].'</button>';
+			$ret .= '<button name="event" value="'.$b[0].'" '.$b[2].' type="submit" class="btn'.(!isset($primary)?' btn-primary':'').'">'.$b[1].'</button>';
 			$primary = true;
 		}
 		$ret .= '</div>';
@@ -877,7 +887,7 @@ class FORMS
 	*/
 	function button($event,$label,$params='')
 	{
-		$this->field_button[] = array("event_".$event, $label, $params);
+		$this->field_button[] = array($event, $label, $params);
 	}
 
 	/**

@@ -330,104 +330,121 @@ class e
 	*	
 	*	with case we switch between singular and plural
 	*/
-	function o($key = null,$replace = null,$case = false,$page = null){	
+	function o($key = null,$replace = null,$case = false,$page = null,$system=false)
+	{	
 
 		if(!$key)
 		{
 			return;
 		}
-		$opc = &OPC::singleton();
-
-		if($page)
-		{
-			$target_folder = $page;
-		}
-		elseif($opc->current_mod())
-		{
-			$target_folder = $opc->current_mod();
-		}
-		elseif(UTIL::get_post('mod'))
-		{
-			$target_folder = UTIL::get_post('mod');
-		}
-		elseif($opc->lang_page())
-		{
-			$target_folder = $opc->lang_page();
-		}
-		elseif(@$this->mod_name)
-		{
-			$target_folder = $this->mod_name;
-		}
-		else
-		{
-			switch(strtolower(get_class($this)))
-			{
-				case 'form':
-					$info = get_object_vars($this);
-					$target_folder = $opc->current_mod();
-				break;
-				case 'mc':
-					$info = get_object_vars($this);
-					$target_folder = UTIL::get_post('mod');
-				break;
-				case 'opc':
-					$info = get_object_vars($this);
-					if(@$info['position_info']['mod_name']){
-						$target_folder = $info['position_info']['mod_name'];
-					}
-					elseif(@$info['start_view'][1]){
-						$target_folder = $info['start_view'][1];
-
-					}
-					else{
-						$target_folder = 'system/'.get_class($this);
-					}
-				break;
-				default:
-				
-					$target_folder = 'system/'.get_class($this);
-			}
-		}
-		
 
 		$lang_folder = defined('USR_LANG_LOG') ? USR_LANG_LOG : USR_LANG;
-//		die(USR_LANG);
-		if(is_file(CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.$lang_folder.'.php'))
+		$opc = &OPC::singleton();
+
+
+		if($system === false)
 		{
-			$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.$lang_folder.'.php';
-		}
-		else
-		{
-			$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.$lang_folder.'.php';
-		}
-		if($debug)
-		{
-			$OPC = &OPC::singleton();
-			$OPC->lang_log[] = $file.' for '.$key;
-		}
-		
-		if(!is_file($file)){
-			// try and catch the default language
-			if(is_file(CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.CONF::lang().'.php'))
+			if($page)
 			{
-				$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.CONF::lang().'.php';
+				$target_folder = $page;
+			}
+			elseif($opc->current_mod())
+			{
+				$target_folder = $opc->current_mod();
+			}
+			elseif(UTIL::get_post('mod'))
+			{
+				$target_folder = UTIL::get_post('mod');
+			}
+			elseif($opc->lang_page())
+			{
+				$target_folder = $opc->lang_page();
+			}
+			elseif(@$this->mod_name)
+			{
+				$target_folder = $this->mod_name;
 			}
 			else
 			{
-				$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::lang().'.php';
-			}
-
-
-
-			if(!is_file($file))
-			{
-				$file = CONF::inc_dir().'/etc/lang/'.$lang_folder.'.php';
-				if(!is_file($file))
+				switch(strtolower(get_class($this)))
 				{
-					$file = CONF::inc_dir().'/etc/lang/'.CONF::lang().'.php';
+					case 'form':
+						$info = get_object_vars($this);
+						$target_folder = $opc->current_mod();
+					break;
+					case 'mc':
+						$info = get_object_vars($this);
+						$target_folder = UTIL::get_post('mod');
+					break;
+					case 'opc':
+						$info = get_object_vars($this);
+						if(@$info['position_info']['mod_name']){
+							$target_folder = $info['position_info']['mod_name'];
+						}
+						elseif(@$info['start_view'][1]){
+							$target_folder = $info['start_view'][1];
+
+						}
+						else{
+							$target_folder = 'system/'.get_class($this);
+						}
+					break;
+					default:
+					
+						$target_folder = 'system/'.get_class($this);
 				}
 			}
+
+			if(is_file(CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.$lang_folder.'.php'))
+			{
+				$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.$lang_folder.'.php';
+			}
+			else
+			{
+				$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.$lang_folder.'.php';
+			}
+			if($debug)
+			{
+				$OPC = &OPC::singleton();
+				$OPC->lang_log[] = $file.' for '.$key;
+			}
+			
+			if(!is_file($file))
+			{
+				// try and catch the default language
+				if(is_file(CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.CONF::lang().'.php'))
+				{
+					$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::project_name().'/'.CONF::lang().'.php';
+				}
+				else
+				{
+					$file = CONF::inc_dir().'/mods/'.$target_folder.'/language/'.CONF::lang().'.php';
+				}
+
+
+
+				if(!is_file($file))
+				{
+					$file = CONF::inc_dir().'/etc/language/'.$lang_folder.'.php';
+					if(!is_file($file))
+					{
+						$file = CONF::inc_dir().'/etc/language/'.CONF::lang().'.php';
+					}
+				}
+			}
+
 		}
+		else
+		{
+			$file = CONF::inc_dir().'/etc/language/'.$lang_folder.'.php';
+			if(!is_file($file))
+			{
+				$file = CONF::inc_dir().'/etc/language/'.CONF::lang().'.php';
+			}
+		}
+
+
+	
 
 
 		if(is_file($file))
