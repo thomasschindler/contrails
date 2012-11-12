@@ -67,7 +67,7 @@
       ?>
       <div class="row">
         <div class="span12">
-          <?=$OPC->call('test')?>
+          Call your module here.
         </div>
       </div>
     </div>

@@ -9,7 +9,7 @@ $config = array
 			'Null' => 'NO',
 			'Key' => 'PRI',
 			'Default' => NULL,
-			'Extra' => 'auto_increment',
+			'Extra' => '',
 		),
 		'show_id' => array
 		(
