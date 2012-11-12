@@ -19,13 +19,13 @@ class test_action extends modAction
 	*	step2 of the creation process
 	*	add the currency
 	*/
-
 	function step2()
 	{
 		// clone the currency
 		$r = $this->CRUD->load('tajapa_currency','id',$this->data['tajapa_currency']);
 		$c = $r->r();
 		$c['template'] = 0;
+		$c['parent'] = $c['id'];
 		unset($c['id']);
 		$tajapa_currency = $this->CRUD->create('tajapa_currency',$c);
 		// add it to the marketplace
@@ -39,7 +39,6 @@ class test_action extends modAction
 	*	store the current marketplace
 	*	for the current user
 	*/
-
 	function step1()
 	{
 		$this->data['uid'] = $this->CLIENT->usr['id'];
@@ -52,7 +51,10 @@ class test_action extends modAction
 		}
 		return $this->set_view('step1');
 	}
-
+	
+	/**
+	*	create the user
+	*/
 	function step0()
 	{
 		$f = new FORMS('step0');

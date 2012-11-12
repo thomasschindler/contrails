@@ -20,11 +20,17 @@ class test_view extends modView
 		}
 	}
 
+	/**
+	*	invite some friends
+	*/
 	function step3()
 	{
 		$this->show('step3');
 	}
 
+	/**
+	*	choose the currency
+	*/
 	function step2()
 	{
 		$r = $this->CRUD->load_range('tajapa_currency','*',array('template'=>1));
@@ -43,7 +49,10 @@ class test_view extends modView
 		$this->set_var('form',$f->show());
 		$this->show('step1');
 	}
-
+	
+	/**
+	*	create the user
+	*/
 	function step0()
 	{
 		$f = new FORMS('step0');
