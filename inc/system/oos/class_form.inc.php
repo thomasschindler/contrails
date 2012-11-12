@@ -150,9 +150,13 @@ class FORM {
 	
 	var $form_name;
 	
-	function FORM() 
+	function FORM($conf=null) 
 	{
-			$this->OPC = &OPC::singleton();
+		$this->OPC = &OPC::singleton();
+		if(is_array($conf))
+		{
+			$this->create($conf);
+		}
 	}
 	
 	function error_set($name,$error_fields,$data)

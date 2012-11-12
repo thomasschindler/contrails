@@ -225,6 +225,7 @@
 				return;
 			}
 			
+			$pwd = $p['info']['pwd'];
 			$p['info']['pwd'] = md5($p['info']['pwd']);
 			
 			foreach($p['info'] as $k=>$v)
@@ -279,8 +280,23 @@
 			}
 			if($p['login'])
 			{
-				$usr['register_key'] = '';
-				$this->CLIENT->set_auth($usr);
+				//$usr['register_key'] = '';
+				//$this->CLIENT->set_auth($usr);
+				$usr = $p['info']['usr'];
+			
+				$check = $this->MC->call_action(array('mod' => 'usradmin', 'event' => 'usr_validate'), $this->data);
+			
+				if (is_error($check)) 
+				{
+					forms::set_error_fields(array('usr'=>true,'pwd'=>true));
+					$this->OPC->error($check->txt);
+					return $this->set_start_view('login_show');
+				}
+				else 
+				{
+					setcookie(CONF::project_name(),md5($check['usr']),time()+86400,"/",substr(CONF::baseurl(),7));
+					$this->CLIENT->set_auth($check);
+				}
 			}
 			return true;
 		}

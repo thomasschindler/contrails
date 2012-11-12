@@ -127,6 +127,7 @@ class db_crud
 	public function create($table_name, $values, $defaults)
 	{
 		$schema = $this->DB->get_schema($table_name);		//	db_table object
+
 		if (is_null($schema)) {
 			$this->failedQuery("Method: Create\nDescription: Schema was evaluated as null.\nTable: $table_name\nValues: " . print_r($values, true) . "\nDefaults: " . print_r($defaults, true));
 			return -1;
@@ -159,6 +160,8 @@ class db_crud
 					$ok = false;
 				}
 			}
+
+
 
 			//NULL check, PHP NULL should be directly accepted. If it's a stringed NULL, set it to base NULL
 			$value = $this->normalize_null($value);
@@ -208,6 +211,8 @@ class db_crud
 			 . "  (\n    " . implode(",\n    ", $field_names) . ")\n"
 			 . "VALUES\n"
 			 . "  (\n    " . implode(",\n    ", $checked_values) . "\n)\n";
+
+
 
 		$check = $this->DB->query_bool($this->sql);
 		if (true == $check) {

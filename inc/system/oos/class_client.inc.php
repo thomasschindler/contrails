@@ -216,8 +216,8 @@ class CLIENT {
 		$this->usr = $info;
 		$this->SESS->set('client', $this->auth_sess_key, true);
 		$this->SESS->set('client', 'usr', $info);
-		$lang = e::lang();			
-		define("USR_LANG_LOG",$lang[$this->usr['lang']]);		
+		$lang = e::lang();
+		define("USR_LANG_LOG",$lang[$this->usr['lang']]);
 	}
 
 	/**

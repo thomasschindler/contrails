@@ -2,6 +2,7 @@
 
 abstract class model{
 	protected $_fields;
+	private $form;
 
 	private $_state = array(
 				mstack::Delete 	=> null,
@@ -12,6 +13,130 @@ abstract class model{
 			);
 
 	public function __construct(){} 
+
+	/**
+	*	set receives an array of values and tries to set them
+	*/
+	function set($a)
+	{
+		foreach($a as $k => $v)
+		{
+			$this->{$k}($v);
+		}
+	}
+
+	/**
+	*	returns a form configuration to be used with the form and validator classes 
+	*/
+	public function form()
+	{
+		if(!$this->form)
+		{
+			$f = $this->_fields();
+
+			$i = array();
+			if(method_exists($this,'form_ignore'))
+			{
+				$i = $this->form_ignore();
+			}
+			
+			foreach($f as $field => $data)
+			{
+				if(in_array($field, $i))
+				{
+					continue;
+				}
+				if($fld = $this->form_parse_cnf($data))
+				{
+					$this->form['fields'][$field] = $fld;
+				}
+				
+			}
+		}
+		return $this->form;
+	}
+
+	private function form_parse_cnf($data)
+	{
+		$conf = array();
+		if($data['Key'] == 'PRI')
+		{
+			// this should only be carried through, if it has a value
+			if($this->{strtolower($data['Field'])}() == false)
+			{
+				return;
+			}
+			$conf['cnf']['type'] = 'hidden';
+			$conf['cnf']['unique'] = 'true';
+			$conf['cnf']['err_unique'] = e::o('err_unique_generic');
+		}
+		else
+		{
+			$conf['label'] = strtoupper($data['Field']);
+			// extract the type
+			$tmp = explode("(",$data['Type']);
+			$type = strtolower($tmp[0]);
+			$length = NULL;
+			if(isset($tmp[1]))
+			{
+				$tmp = explode(")",$tmp[1]);
+				$conf['cnf']['max'] = $tmp[0];
+
+			}
+			switch($type)
+			{
+				case 'enum':
+					$conf['cnf']['type'] = 'select';
+					// @todo: items
+				break;
+				case 'text':
+					$conf['cnf']['type'] = 'input';
+					$conf['cnf']['format'] = 'text';
+					$conf['cnf']['err_format'] = e::o('err_text_generic');
+				break;
+				default:
+					if(preg_match("/pass/i",$data['Field']) || preg_match("/pwd/i",$data['Field']) )
+					{
+						$conf['cnf']['type'] = 'password';
+					}
+					else
+					{
+						$conf['cnf']['type'] = 'input';
+					}
+					// validations
+					if(preg_match("/mail/i",$data['Field']))
+					{
+						$conf['cnf']['format'] = 'email';
+						$conf['cnf']['err_format'] = e::o('err_email_generic');
+					}
+					else
+					{
+						switch($type)
+						{
+							case 'smallint':
+							case 'tinyint':
+							case 'int':
+								$conf['cnf']['format'] = 'int';
+								$conf['cnf']['err_format'] = e::o('generic_form_error_int',null,null,null,true);
+							break;
+							default:
+								$conf['cnf']['format'] = 'text';
+								$conf['cnf']['err_format'] = e::o('generic_form_error_text',null,null,null,true);
+						}
+					}
+				break;
+			}
+		}
+		// add the value
+		$conf['cnf']['value'] = $this->{strtolower($data['Field'])}();
+		// is it allowed to be emtpy?
+		if($data['Null'] == 'NO')
+		{
+			$conf['cnf']['empty'] = false;
+			$conf['cnf']['err_empty'] = e::o('generic_form_error_empty',null,null,null,true);
+		}
+		return $conf;
+	}
 
 	public function primary_key(){
 		$keys = $this->_keys();

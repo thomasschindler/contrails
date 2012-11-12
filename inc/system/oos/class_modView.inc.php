@@ -319,6 +319,21 @@ class modView {
 		return $ret;
 	}
 	
+	function form($form,$id=null)
+	{
+		if($id === null)
+		{
+			$t = $this->MOF->obtain($form);
+		}
+		else
+		{
+			$t = $this->MOF->obtain($form,$id);
+		}
+		$f = new FORMS($t->form());
+		return $f;
+	}
+
+
 	/**
 	* create and return a link
 	*/
@@ -415,6 +430,9 @@ class modView {
 			$this->OPC->lnk_add('__b',1);
 			$this->set_var('boxed',1);
 		}
+
+		$vid = UTIL::get_post('vid');
+		$this->OPC->lnk_add('vid',$vid);
 	}		
 	
 }
