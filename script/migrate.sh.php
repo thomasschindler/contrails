@@ -142,7 +142,11 @@ function models()
 				mkdir($base."inc/models/".$table);
 			}
 			file_put_contents($base."inc/models/".$table."/generated.php", $s);
-			file_put_contents($base."inc/models/".$table."/model.php", "<?class ".$table." extends generated_".$table." {} ?>");
+			if(!is_file($base."inc/models/".$table."/model.php"))
+			{
+				file_put_contents($base."inc/models/".$table."/model.php", "<?class ".$table." extends generated_".$table." {} ?>");
+			}
+			
 		}
 	}
 }
@@ -180,6 +184,7 @@ function sync()
 					}
 				}
 				$q = "CREATE TABLE ".$table." (".implode(", ",$fields).") DEFAULT CHARSET=utf8";
+
 				$db->query($q);
 				// fill with data
 				if(isset($config['data']))
@@ -269,6 +274,7 @@ function field_get($field,$table)
 	$tmp[] = $field['Type'];
 	$tmp[] = $field['Null'] == 'NO' ? "NOT NULL" : "NULL";
 	$tmp[] = !empty($field['Default']) ? "DEFAULT '".$field['Default']."'" : "";
+	$tmp[] = !empty($field['Extra']) ? strtoupper($field['Extra']) : '';
 	return implode(" ",$tmp);
 }
 
