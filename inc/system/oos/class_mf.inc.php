@@ -31,7 +31,11 @@ class MF{
 
 	}
 
-	public function &register($instance){
+	public function &register($instance)
+	{
+
+
+
 		$status = $instance->pull();
 
 
@@ -41,15 +45,20 @@ class MF{
 		}*/
 		
 		$table = $instance->table_name();
+
+
 		
 		$key = $this->create_record($table, $status['data']);
 
-		if(is_null($key)){
+
+		if(is_null($key))
+		{
 			log::err("Insertion failed");
 			return null;
 		}
 
-		if(!isset($this->_instances[$table])){
+		if(!isset($this->_instances[$table]))
+		{
 			$this->_instances[$table] = array();
 		}
 
@@ -100,12 +109,14 @@ class MF{
 		return $this->_instances[$table][$key];
 	}
 
-	private function create_record($table, $data){
-		if(!class_exists($table)){
+	private function create_record($table, $data)
+	{
+		if(!class_exists($table))
+		{
 			log::err("Attempted to load an unexisting class in the MF::obtain method '$table'");
 			return null;
 		}
-
+		
 		$key = $this->do_create($table, $data);
 		if($key == -1){
 			MC::log("Failed to insert the record into the Database  " . $this->crud()->err_msg);

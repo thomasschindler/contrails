@@ -57,12 +57,15 @@ class FORMS
 	/**
 	* validate the form
 	*/
-	function valid($mode='enter')
+	function valid($data=array(),$mode='enter')
 	{
-		$v = new validator($this->conf);
-		if(!$v->is_valid(UTIL::get_post('data'),$mode))
+		if(count($data) == 0)
 		{
-			// set the errorfields
+			$data = UTIL::get_post('data');
+		}
+		$v = new validator($this->conf);
+		if(!$v->is_valid($data,$mode))
+		{
 			$this->set_error_fields($v->get_error_fields());
 			return false;
 		}
@@ -492,6 +495,14 @@ class FORMS
 		*/
 
 		return $ret;
+	}
+	function field_textarea($name, $cnf) 
+	{
+		$width  = (isset($cnf['width']))  ? $cnf['width'] : '400px';
+		$height = (isset($cnf['height'])) ? $cnf['height'] : '300px';
+		$field_name  = $this->form_prefix.'['.$name.']';
+		$field_value = "\n".((isset($this->values[$name])) ? $this->values[$name] : (isset($cnf['value']) ? $cnf['value'] : ''));
+		return '<textarea name="'.$field_name.'" style="width:'.$width.'; height:'.$height.'" '.($cnf['readonly'] ? 'readonly' : '').'>'.stripslashes($field_value).'</textarea>';
 	}
 /**
 *	
