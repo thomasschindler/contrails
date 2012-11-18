@@ -536,7 +536,7 @@ class modAction {
 		return $this->OPC->lnk($a);
 	}
 	
-	function form($form,$id=null)
+	function form($form,$id=null,$ignore=array())
 	{
 
 		if($id==null)
@@ -547,16 +547,16 @@ class modAction {
 		{
 			$t = $this->MOF->obtain($form,$id);
 		}
+
+		$c = $t->form($ignore);
 		
-		$c = $t->form();
 		$f = new FORMS($c);
 		
-		if(!$f->valid())
+		if(!$f->valid($this->data))
 		{
 			$this->OPC->error(e::o('generic_form_error',null,null,null,true));
 			return false;
 		}
-
 		$this->OPC->success(e::o('generic_form_success',null,null,null,true));
 		// make sure all integer values are at least set to 0
 		foreach($c['fields'] as $fld => $dat)
@@ -567,6 +567,7 @@ class modAction {
 			}
 		}
 		$t->set($this->data);
+
 		if($id == null)
 		{
 			return $this->MOF->register($t);

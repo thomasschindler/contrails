@@ -66,11 +66,12 @@ class log
 		return self::msg($msg, error_message_level::debug);	
 	}
 
-	public static function msg($text, $level){
+	public static function msg($text, $level)
+	{
 		$logpath = CONF::dir('log') . CONF::project_name() . "/" . date("Ymd") . "/" . session_id();
-		if(!is_dir($logpath)){
-			//echo $logpath;
-			//mkdir($logpath, "0777", true);
+		if(!is_dir($logpath))
+		{
+			mkdir($logpath, "0777", true);
 		}
 		switch ($level) {
 			case error_message_level::error:
